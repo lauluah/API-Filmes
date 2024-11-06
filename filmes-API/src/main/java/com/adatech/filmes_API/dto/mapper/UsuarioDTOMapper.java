@@ -1,4 +1,4 @@
-package com.adatech.filmes_API.mapper;
+package com.adatech.filmes_API.dto.mapper;
 
 import com.adatech.filmes_API.dto.request.CriarUsuarioDTO;
 import com.adatech.filmes_API.dto.response.UsuarioResponseDTO;
@@ -12,6 +12,7 @@ public class UsuarioDTOMapper {
         usuario.setEmail(criarUsuarioDTO.getEmail());
         usuario.setCpf(criarUsuarioDTO.getCpf());
         usuario.setIdade(criarUsuarioDTO.getIdade());
+        usuario.setFilmeFavorito(criarUsuarioDTO.getFilmeFavorito());
         return usuario;
     }
 
