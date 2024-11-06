@@ -1,4 +1,4 @@
-package com.adatech.filmes_API.service;
+package com.adatech.filmes_API.service.UsuarioService;
 
 
 import com.adatech.filmes_API.model.Usuario;

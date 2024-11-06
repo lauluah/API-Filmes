@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "USUARIO")
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,10 +15,10 @@ public class Usuario {
     private String nome;
 
     @Column(name = "IDADE", nullable = false)
-    private int idade;
+    private Integer idade;
 
-    @Column(name = "GENERO", nullable = false)
-    private String genero;
+    @Column(name = "FILME_FAV", nullable = false)
+    private String filmeFavorito;
 
     @Column(name = "CPF", nullable = false, unique = true)
     private String cpf;
@@ -34,11 +33,11 @@ public class Usuario {
         this.dataHoraCriacao = LocalDateTime.now();
     }
 
-    public Usuario(Long id, String nome, int idade, String genero, String cpf, String email) {
+    public Usuario(Long id, String nome, Integer idade, String filmeFavorito,  String cpf, String email) {
         this.id = id;
         this.nome = nome;
-        this.genero = genero;
         this.idade = idade;
+        this.filmeFavorito = filmeFavorito;
         this.cpf = cpf;
         this.email = email;
     }
@@ -59,24 +58,16 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public Integer getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(Integer idade) {
         this.idade = idade;
     }
 
     public LocalDateTime getDataHoraCriacao() {
         return dataHoraCriacao;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public String getCpf() {
@@ -89,6 +80,14 @@ public class Usuario {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getFilmeFavorito() {
+        return filmeFavorito;
+    }
+
+    public void setFilmeFavorito(String filmeFavorito) {
+        this.filmeFavorito = filmeFavorito;
     }
 
     public void setEmail(String email) {

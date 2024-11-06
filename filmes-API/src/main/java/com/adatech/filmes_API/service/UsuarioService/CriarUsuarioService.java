@@ -1,4 +1,4 @@
-package com.adatech.filmes_API.service;
+package com.adatech.filmes_API.service.UsuarioService;
 
 
 import com.adatech.filmes_API.dto.request.CriarUsuarioDTO;
@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CriarUsuarioService {
-    private final UsuarioRepository repository;
+    private final UsuarioRepository UsuarioRepository;
 
-    public CriarUsuarioService(UsuarioRepository repository) {
-        this.repository = repository;
+    public CriarUsuarioService(UsuarioRepository UsuarioRepository) {
+        this.UsuarioRepository = UsuarioRepository;
     }
 
-    public UsuarioResponseDTO execute(CriarUsuarioDTO usuarioQueSeraSalvo) {
-        Usuario usuarioEntity = UsuarioDTOMapper.toEntity(usuarioQueSeraSalvo);
-        Usuario usuarioPersistido = repository.save(usuarioEntity);
+    public UsuarioResponseDTO execute(CriarUsuarioDTO usuarioParaSalvar) {
+        Usuario usuarioEntity = UsuarioDTOMapper.toEntity(usuarioParaSalvar);
+        Usuario usuarioPersistido = UsuarioRepository.save(usuarioEntity);
         return UsuarioDTOMapper.toResponse(usuarioPersistido);
     }
 }

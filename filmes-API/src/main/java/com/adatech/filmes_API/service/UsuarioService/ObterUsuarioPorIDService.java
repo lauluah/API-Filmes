@@ -1,4 +1,4 @@
-package com.adatech.filmes_API.service;
+package com.adatech.filmes_API.service.UsuarioService;
 
 
 import com.adatech.filmes_API.exception.UsuarioNaoEncontradoException;
@@ -7,11 +7,11 @@ import com.adatech.filmes_API.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ObterUsuarioPorIdService {
+public class ObterUsuarioPorIDService {
 
     private final UsuarioRepository repository;
 
-    public ObterUsuarioPorIdService(UsuarioRepository repository) {
+    public ObterUsuarioPorIDService(UsuarioRepository repository) {
         this.repository = repository;
     }
 
