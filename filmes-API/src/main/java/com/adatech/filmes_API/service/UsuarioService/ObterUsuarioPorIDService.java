@@ -1,6 +1,7 @@
 package com.adatech.filmes_API.service;
 
 
+import com.adatech.filmes_API.exception.UsuarioNaoEncontradoException;
 import com.adatech.filmes_API.model.Usuario;
 import com.adatech.filmes_API.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class ObterUsuarioPorIdService {
     }
 
     public Usuario execute(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException(String.format("Não foi possível encontrar usuário com id %s", id)));
+        return repository.findById(id).orElseThrow(() -> new UsuarioNaoEncontradoException(String.format("Não foi possível encontrar usuário com id %s", id)));
     }
 
 }
