@@ -21,6 +21,7 @@ public class UsuarioDTOMapper {
         dto.setCpf(usuario.getCpf());
         dto.setNome(usuario.getNome());
         dto.setIdade(usuario.getIdade());
+        dto.setFilmeFavorito(usuario.getFilmeFavorito());
         return dto;
     }
 }

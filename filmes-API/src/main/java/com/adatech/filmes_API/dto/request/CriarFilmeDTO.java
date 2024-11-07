@@ -18,8 +18,8 @@ public class CriarFilmeDTO {
     @Size(min = 3, max = 60, message = "O comentário do filme deve ter entre 3 e 60 caracteres.")
     private String comentario;
 
-    @Pattern(regexp = "^[a-z]+$", message = "O valor deve estar em letras minúsculas.")
-    @Pattern(regexp = "vermelho|amarelo|azul|verde", message = "A cor deve ser uma das seguintes: vermelho, amarelo, azul, verde.")
+    @NotBlank(message = "A cor da avaliação é obrigatória e não pode estar em branco.")
+    @Pattern(regexp = "(?i)vermelho|amarelo|azul|verde", message = "A cor deve ser uma das seguintes: vermelho, amarelo, azul, verde.")
     private String corAvaliacao;
 
     public CriarFilmeDTO(String nomeFilme, String genero, Double nota, String comentario, String corAvaliacao) {
@@ -64,11 +64,11 @@ public class CriarFilmeDTO {
         this.comentario = comentario;
     }
 
-    public @Pattern(regexp = "^[a-z]+$", message = "O valor deve estar em letras minúsculas.") @Pattern(regexp = "vermelho|amarelo|azul|verde", message = "A cor deve ser uma das seguintes: vermelho, amarelo, azul, verde.") String getCorAvaliacao() {
+    public @NotBlank(message = "A cor da avaliação é obrigatória e não pode estar em branco.") @Pattern(regexp = "(?i)vermelho|amarelo|azul|verde", message = "A cor deve ser uma das seguintes: vermelho, amarelo, azul, verde.") String getCorAvaliacao() {
         return corAvaliacao;
     }
 
-    public void setCorAvaliacao(@Pattern(regexp = "^[a-z]+$", message = "O valor deve estar em letras minúsculas.") @Pattern(regexp = "vermelho|amarelo|azul|verde", message = "A cor deve ser uma das seguintes: vermelho, amarelo, azul, verde.") String corAvaliacao) {
+    public void setCorAvaliacao( @NotBlank(message = "A cor da avaliação é obrigatória e não pode estar em branco.") @Pattern(regexp = "(?i)vermelho|amarelo|azul|verde", message = "A cor deve ser uma das seguintes: vermelho, amarelo, azul, verde.") String corAvaliacao){
         this.corAvaliacao = corAvaliacao;
     }
 }

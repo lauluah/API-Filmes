@@ -12,7 +12,7 @@ public class FilmeDTOMapper {
         filme.setGenero(criarFilmeDTO.getGenero());
         filme.setNota(criarFilmeDTO.getNota());
         filme.setComentario(criarFilmeDTO.getComentario());
-        filme.setCorAvaliacao(criarFilmeDTO.getCorAvaliacao());
+        filme.setCorAvaliacao(criarFilmeDTO.getCorAvaliacao().toLowerCase());
         return filme;
     }
 
