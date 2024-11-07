@@ -11,9 +11,6 @@ public class CriarUsuarioDTO {
     @Positive(message = "A idade deve ser um número positivo e maior que zero.")
     private Integer idade;
 
-    @Size(min = 2, max = 40, message = "O filme deve ter entre 2 e 40 caracteres.")
-    private String filmeFavorito;
-
     @NotBlank(message = "O email é obrigatório e não pode estar em branco.")
     @Pattern(regexp = "^[A-Za-z0-9._%+]+@[A-Za-z0-9]+(\\.[A-Za-z]{2,})+$", message = "O formato do email está inválido. Verifique se o email está correto.")
     private String email;
@@ -22,10 +19,9 @@ public class CriarUsuarioDTO {
     @CPF(message = "O formato do CPF está inválido. Por favor, insira um CPF válido.")
     private String cpf;
 
-    public CriarUsuarioDTO(String nome, Integer idade, String filmeFavorito, String email, String cpf) {
+    public CriarUsuarioDTO(String nome, Integer idade, String email, String cpf) {
         this.nome = nome;
         this.idade = idade;
-        this.filmeFavorito = filmeFavorito;
         this.email = email;
         this.cpf = cpf;
     }
@@ -44,14 +40,6 @@ public class CriarUsuarioDTO {
 
     public void setIdade(@Positive(message = "A idade deve ser um número positivo e maior que zero.") Integer idade) {
         this.idade = idade;
-    }
-
-    public @Size(min = 2, max = 40, message = "O filme deve ter entre 2 e 40 caracteres.") String getFilmeFavorito() {
-        return filmeFavorito;
-    }
-
-    public void setFilmeFavorito(@Size(min = 2, max = 40, message = "O filme deve ter entre 2 e 40 caracteres.") String filmeFavorito) {
-        this.filmeFavorito = filmeFavorito;
     }
 
     public @NotBlank(message = "O email é obrigatório e não pode estar em branco.") @Pattern(regexp = "^[A-Za-z0-9._%+]+@[A-Za-z0-9]+(\\.[A-Za-z]{2,})+$", message = "O formato do email está inválido. Verifique se o email está correto.") String getEmail() {

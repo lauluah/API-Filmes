@@ -17,9 +17,6 @@ public class Usuario {
     @Column(name = "IDADE", nullable = false)
     private Integer idade;
 
-    @Column(name = "FILME_FAV", nullable = false)
-    private String filmeFavorito;
-
     @Column(name = "CPF", nullable = false, unique = true)
     private String cpf;
 
@@ -33,11 +30,10 @@ public class Usuario {
         this.dataHoraCriacao = LocalDateTime.now();
     }
 
-    public Usuario(Long id, String nome, Integer idade, String filmeFavorito,  String cpf, String email) {
+    public Usuario(Long id, String nome, Integer idade, String cpf, String email) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
-        this.filmeFavorito = filmeFavorito;
         this.cpf = cpf;
         this.email = email;
     }
@@ -80,14 +76,6 @@ public class Usuario {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getFilmeFavorito() {
-        return filmeFavorito;
-    }
-
-    public void setFilmeFavorito(String filmeFavorito) {
-        this.filmeFavorito = filmeFavorito;
     }
 
     public void setEmail(String email) {
