@@ -1,18 +1,20 @@
 package com.adatech.filmes_API.dto.mapper;
 
 import com.adatech.filmes_API.dto.request.CriarUsuarioDTO;
+import com.adatech.filmes_API.dto.response.FilmeResponseDTO;
 import com.adatech.filmes_API.dto.response.UsuarioResponseDTO;
 import com.adatech.filmes_API.model.Usuario;
 
 public class UsuarioDTOMapper {
 
-    public static Usuario toEntity(CriarUsuarioDTO criarUsuarioDTO) {
+    public static Usuario toEntity(CriarUsuarioDTO criarUsuarioDTO, FilmeResponseDTO filmeResponseDTO) {
         Usuario usuario = new Usuario();
         usuario.setNome(criarUsuarioDTO.getNome());
         usuario.setEmail(criarUsuarioDTO.getEmail());
         usuario.setCpf(criarUsuarioDTO.getCpf());
         usuario.setIdade(criarUsuarioDTO.getIdade());
         usuario.setFilmeFavorito(criarUsuarioDTO.getFilmeFavorito());
+        usuario.setFilmeFavorito(filmeResponseDTO.getNomeFilme());
         return usuario;
     }
 

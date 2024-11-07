@@ -1,10 +1,21 @@
 package com.adatech.filmes_API.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+//Classe de retorno da chamada da API externa
 public class FilmeResponseDTO {
+    @JsonProperty("title")
     private String nomeFilme;
+
+    @JsonProperty("genre_ids")
     private String genero;
+
+    @JsonProperty("vote_average")
     private Double nota;
+
+    @JsonProperty("overview")
     private String comentario;
+
     private String corAvaliacao;
 
     public FilmeResponseDTO(String nomeFilme, String genero, Double nota, String comentario, String corAvaliacao) {

@@ -29,6 +29,10 @@ public class Usuario {
     @Column(name = "DATA_HORA_CRIACAO")
     private LocalDateTime dataHoraCriacao;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "FILME_ID")
+    private Filme filme;
+
     public Usuario() {
         this.dataHoraCriacao = LocalDateTime.now();
     }

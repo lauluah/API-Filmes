@@ -1,5 +1,6 @@
 package com.adatech.filmes_API.dto.request;
 
+import com.adatech.filmes_API.dto.response.FilmeResponseDTO;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -22,12 +23,15 @@ public class CriarUsuarioDTO {
     @CPF(message = "O formato do CPF está inválido. Por favor, insira um CPF válido.")
     private String cpf;
 
-    public CriarUsuarioDTO(String nome, Integer idade, String filmeFavorito, String email, String cpf) {
+    private FilmeResponseDTO filme;
+
+    public CriarUsuarioDTO(String nome, Integer idade, String filmeFavorito, String email, String cpf, FilmeResponseDTO filme) {
         this.nome = nome;
         this.idade = idade;
         this.filmeFavorito = filmeFavorito;
         this.email = email;
         this.cpf = cpf;
+        this.filme = filme;
     }
 
     public @NotBlank(message = "O nome é obrigatório e não pode estar em branco.") @Size(min = 3, max = 50, message = "O nome deve ter entre 3 e 50 caracteres.") String getNome() {
@@ -69,4 +73,13 @@ public class CriarUsuarioDTO {
     public void setCpf(@NotBlank(message = "O CPF é obrigatório e não pode estar em branco.") @CPF(message = "O formato do CPF está inválido. Por favor, insira um CPF válido.") String cpf) {
         this.cpf = cpf;
     }
+
+    public FilmeResponseDTO getFilme() {
+        return filme;
+    }
+
+    public void setFilme(FilmeResponseDTO filme) {
+        this.filme = filme;
+    }
+
 }
