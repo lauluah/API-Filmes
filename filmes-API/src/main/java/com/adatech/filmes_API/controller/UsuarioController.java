@@ -43,6 +43,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.OK).body(obterUsuarioPorIdService.execute(id));
     }
 
+    //p
     @GetMapping
     public Page<Usuario> obterUsuariosPaginados(Pageable pageable) {
         return obterUsuariosService.execute(pageable);
@@ -52,11 +53,6 @@ public class UsuarioController {
     public List<Usuario> obterUsuariosPorNome(@RequestParam String nome) {
         return obterUsuariosPorFiltro.obterUsuarioPorNome(nome);
     }
-
-//    @GetMapping("/genero")
-//    public List<Usuario> obterUsuariosPorGenero(@RequestParam String genero) {
-//        return obterUsuariosPorFiltro.obterUsuarioPorGenero(genero);
-//    }
 
     @GetMapping("/cpf")
     public Usuario obterUsuariosPorCpf(@RequestParam String cpf) {

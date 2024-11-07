@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface FilmeRepository extends JpaRepository<Filme, Long> {
 
-  //  List<Filme> findByNomeContaining(String nome);
+    List<Filme> findByNomeFilmeContaining(String nome);
 
     Optional<Filme> findById(Long id);
 
-    //List<Filme> findByGeneroContaining(String genero);
+    List<Filme> findByGeneroContaining(String genero);
 
- //   List<Filme> findByNota(double nota);
+    List<Filme> findByNota(double nota);
 
-   // List<Filme> findByCorAvaliacao(String corAvaliacao);
+    List<Filme> findByCorAvaliacao(String corAvaliacao);
 }

@@ -18,7 +18,7 @@ public class CriarUsuarioService {
 
     public UsuarioResponseDTO execute(CriarUsuarioDTO usuarioParaSalvar) {
         Usuario usuarioEntity = UsuarioDTOMapper.toEntity(usuarioParaSalvar);
-        Usuario usuarioPersistido = UsuarioRepository.save(usuarioEntity);
-        return UsuarioDTOMapper.toResponse(usuarioPersistido);
+        Usuario usuarioSalvo = UsuarioRepository.save(usuarioEntity);
+        return UsuarioDTOMapper.toResponse(usuarioSalvo);
     }
 }

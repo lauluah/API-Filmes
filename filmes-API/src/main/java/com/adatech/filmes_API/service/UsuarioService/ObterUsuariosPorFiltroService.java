@@ -16,14 +16,6 @@ public class ObterUsuariosPorFiltroService {
         this.repository = repository;
     }
 
-//    public List<Usuario> obterUsuarioPorGenero(String genero) {
-//        List<Usuario> usuarioPorGenero = repository.findByGeneroContaining(genero);
-//        if (usuarioPorGenero.isEmpty()) {
-//            throw new UsuarioNaoEncontradoException(String.format("Não foi possível encontrar usuários com o gênero: %s", genero));
-//        }
-//        return usuarioPorGenero;
-//    }
-
     public Usuario obterUsuarioPorEmail(String email) {
         return repository.findByEmail(email).orElseThrow(() -> new UsuarioNaoEncontradoException(String.format("Não foi possível encontrar usuário com o email %s", email)));
     }

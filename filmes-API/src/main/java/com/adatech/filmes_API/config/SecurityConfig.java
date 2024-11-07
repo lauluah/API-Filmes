@@ -24,8 +24,8 @@ public class SecurityConfig {
                             .permitAll();
                     req.requestMatchers(HttpMethod.GET, "/usuarios/**")
                             .authenticated();
-                    req.requestMatchers(new AntPathRequestMatcher("/h2/**"))
-                            .permitAll();
+                    req.requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+                            .authenticated();
                     req.requestMatchers(new AntPathRequestMatcher("/favicon.ico"))
                             .permitAll();
 

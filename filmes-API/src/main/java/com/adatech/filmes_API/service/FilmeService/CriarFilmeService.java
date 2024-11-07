@@ -19,8 +19,7 @@ public class CriarFilmeService {
 
     public FilmeResponseDTO execute(CriarFilmeDTO filmeParaSalvar) {
         Filme filmeEntity = FilmeDTOMapper.toEntity(filmeParaSalvar);
-        //mudar nome var
-        Filme filmePersistido = filmeRepository.save(filmeEntity);
-        return FilmeDTOMapper.toResponse(filmePersistido);
+        Filme filmeSalvo = filmeRepository.save(filmeEntity);
+        return FilmeDTOMapper.toResponse(filmeSalvo);
     }
 }
