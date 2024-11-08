@@ -1,6 +1,7 @@
 package com.adatech.filmes_API.controller;
 
 import com.adatech.filmes_API.dto.request.CriarFilmeDTO;
+import com.adatech.filmes_API.dto.response.FilmeApiResponseDTO;
 import com.adatech.filmes_API.dto.response.FilmeResponseDTO;
 import com.adatech.filmes_API.service.FilmeService.CriarFilmeService;
 import com.adatech.filmes_API.service.FilmeService.ObterFilmePorIDService;
@@ -35,10 +36,16 @@ public class FilmeController {
         return ResponseEntity.status(HttpStatus.OK).body(obterFilmePorIDService.execute(id));
     }
 
-    @GetMapping("/tmdb/{id}")
-    public ResponseEntity<FilmeResponseDTO> obterDetalhesFilmeTMDb(@PathVariable String id) {
-        FilmeResponseDTO filmeResponseDTO = tmdbService.execute(id);
+    @GetMapping("/tmdb/nome/{nome}")
+    public ResponseEntity<FilmeApiResponseDTO> obterDetalhesFilmeTMDb(@PathVariable String nome) {
+        FilmeApiResponseDTO filmeResponseDTO = tmdbService.obterDetalhesFilme(nome);
         return ResponseEntity.status(HttpStatus.OK).body(filmeResponseDTO);
+    }
+
+    @GetMapping("/tmdb/genero/{genero}")
+    public ResponseEntity<FilmeApiResponseDTO[]> obterFilmesPorGenero(@PathVariable String genero) {
+        FilmeApiResponseDTO[] filmes = tmdbService.obterFilmesPorGenero(genero);
+        return ResponseEntity.status(HttpStatus.OK).body(filmes);
     }
 
 }
