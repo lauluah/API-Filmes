@@ -29,17 +29,26 @@ public class Usuario {
     @Column(name = "DATA_HORA_CRIACAO")
     private LocalDateTime dataHoraCriacao;
 
+    //Relacionamento com a tabela ApiFilme
+    //Cada usuário pode ser vinculado a um filme, enquanto um único filme pode ser vinculado a vários usuários
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    //Nome da coluna que será criada na tabela USUARIO
+    //A coluna FILME_BUSCADO_ID irá armazenar o id que foi gerado dentro da tabela FILME_API_RESPONSE
+    @JoinColumn(name = "FILME_BUSCADO_ID")
+    private ApiFilme filmeBuscado;
+
     public Usuario() {
         this.dataHoraCriacao = LocalDateTime.now();
     }
 
-    public Usuario(Long id, String nome, Integer idade, String filmeFavorito,  String cpf, String email) {
+    public Usuario(Long id, String nome, Integer idade, String filmeFavorito, String cpf, String email, ApiFilme filmeBuscado) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.filmeFavorito = filmeFavorito;
         this.cpf = cpf;
         this.email = email;
+        this.filmeBuscado = filmeBuscado;
     }
 
     public Long getId() {
@@ -96,5 +105,13 @@ public class Usuario {
 
     public void setDataHoraCriacao(LocalDateTime dataHoraCriacao) {
         this.dataHoraCriacao = dataHoraCriacao;
+    }
+
+    public ApiFilme getFilmeBuscado() {
+        return filmeBuscado;
+    }
+
+    public void setFilmeBuscado(ApiFilme filmeBuscado) {
+        this.filmeBuscado = filmeBuscado;
     }
 }

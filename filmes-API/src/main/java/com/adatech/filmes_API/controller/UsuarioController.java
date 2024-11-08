@@ -3,10 +3,7 @@ package com.adatech.filmes_API.controller;
 import com.adatech.filmes_API.dto.request.CriarUsuarioDTO;
 import com.adatech.filmes_API.dto.response.UsuarioResponseDTO;
 import com.adatech.filmes_API.model.Usuario;
-import com.adatech.filmes_API.service.UsuarioService.CriarUsuarioService;
-import com.adatech.filmes_API.service.UsuarioService.ObterUsuarioPorIDService;
-import com.adatech.filmes_API.service.UsuarioService.ObterUsuariosPorFiltroService;
-import com.adatech.filmes_API.service.UsuarioService.ObterUsuariosService;
+import com.adatech.filmes_API.service.UsuarioService.*;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,12 +21,16 @@ public class UsuarioController {
     private final CriarUsuarioService criarUsuarioService;
     private final ObterUsuariosPorFiltroService obterUsuariosPorFiltro;
     private final ObterUsuariosService obterUsuariosService;
+    private final AtualizarUsuarioComFilmeService atualizarUsuarioComFilmeService;
 
-    public UsuarioController(ObterUsuarioPorIDService obterUsuarioPorIdService, CriarUsuarioService criarUsuarioService, ObterUsuariosPorFiltroService obterUsuariosPorFiltro, ObterUsuariosService obterUsuariosService) {
+    public UsuarioController(ObterUsuarioPorIDService obterUsuarioPorIdService, CriarUsuarioService criarUsuarioService,
+                             AtualizarUsuarioComFilmeService atualizarUsuarioComFilmeService,
+                             ObterUsuariosPorFiltroService obterUsuariosPorFiltro, ObterUsuariosService obterUsuariosService) {
         this.obterUsuarioPorIdService = obterUsuarioPorIdService;
         this.criarUsuarioService = criarUsuarioService;
         this.obterUsuariosPorFiltro = obterUsuariosPorFiltro;
         this.obterUsuariosService = obterUsuariosService;
+        this.atualizarUsuarioComFilmeService = atualizarUsuarioComFilmeService;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -66,5 +67,11 @@ public class UsuarioController {
     @GetMapping("/email")
     public Usuario ObterUsuarioPorEmail(@RequestParam String email) {
         return obterUsuariosPorFiltro.obterUsuarioPorEmail(email);
+    }
+
+    @PutMapping("/{id}/filme")
+    public ResponseEntity<Usuario> atualizarUsuarioComFilme(@PathVariable Long id, @RequestParam String title) {
+        Usuario usuarioAtualizado = atualizarUsuarioComFilmeService.atualizarUsuarioComFilme(id, title);
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioAtualizado);
     }
 }
