@@ -7,6 +7,10 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -24,8 +28,9 @@ public class SecurityConfig {
                             .permitAll();
                     req.requestMatchers(HttpMethod.GET, "/usuarios/**")
                             .authenticated();
-                    req.requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
-                            .authenticated();
+
+                    req.requestMatchers(new AntPathRequestMatcher("/h2/**"))
+                            .permitAll();
                     req.requestMatchers(new AntPathRequestMatcher("/favicon.ico"))
                             .permitAll();
 

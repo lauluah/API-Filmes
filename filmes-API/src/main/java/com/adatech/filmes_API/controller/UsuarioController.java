@@ -6,7 +6,6 @@ import com.adatech.filmes_API.model.Usuario;
 import com.adatech.filmes_API.service.UsuarioService.CriarUsuarioService;
 import com.adatech.filmes_API.service.UsuarioService.ObterUsuarioPorIDService;
 import com.adatech.filmes_API.service.UsuarioService.ObterUsuariosPorFiltroService;
-import com.adatech.filmes_API.service.UsuarioService.ObterUsuariosService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,13 +22,11 @@ public class UsuarioController {
     private final ObterUsuarioPorIDService obterUsuarioPorIdService;
     private final CriarUsuarioService criarUsuarioService;
     private final ObterUsuariosPorFiltroService obterUsuariosPorFiltro;
-    private final ObterUsuariosService obterUsuariosService;
 
-    public UsuarioController(ObterUsuarioPorIDService obterUsuarioPorIdService, CriarUsuarioService criarUsuarioService, ObterUsuariosPorFiltroService obterUsuariosPorFiltro, ObterUsuariosService obterUsuariosService) {
+    public UsuarioController(ObterUsuarioPorIDService obterUsuarioPorIdService, CriarUsuarioService criarUsuarioService, ObterUsuariosPorFiltroService obterUsuariosPorFiltro) {
         this.obterUsuarioPorIdService = obterUsuarioPorIdService;
         this.criarUsuarioService = criarUsuarioService;
         this.obterUsuariosPorFiltro = obterUsuariosPorFiltro;
-        this.obterUsuariosService = obterUsuariosService;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -41,12 +38,6 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Object> obterUsuarioPorId(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(obterUsuarioPorIdService.execute(id));
-    }
-
-    //p
-    @GetMapping
-    public Page<Usuario> obterUsuariosPaginados(Pageable pageable) {
-        return obterUsuariosService.execute(pageable);
     }
 
     @GetMapping("/nome")

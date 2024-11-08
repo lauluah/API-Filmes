@@ -12,14 +12,15 @@ public class UsuarioDTOMapper {
         usuario.setEmail(criarUsuarioDTO.getEmail());
         usuario.setCpf(criarUsuarioDTO.getCpf());
         usuario.setIdade(criarUsuarioDTO.getIdade());
+        usuario.setPassword(criarUsuarioDTO.getPassword());
         return usuario;
     }
 
     public static UsuarioResponseDTO toResponse(Usuario usuario) {
         UsuarioResponseDTO dto = new UsuarioResponseDTO();
-        dto.setCpf(usuario.getCpf());
         dto.setNome(usuario.getNome());
         dto.setIdade(usuario.getIdade());
+        dto.setEmail(usuario.getEmail());
         return dto;
     }
 }

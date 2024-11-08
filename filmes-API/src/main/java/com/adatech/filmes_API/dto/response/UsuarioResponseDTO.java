@@ -3,12 +3,12 @@ package com.adatech.filmes_API.dto.response;
 public class UsuarioResponseDTO {
     private String nome;
     private Integer idade;
-    private String cpf;
+    private String email;
 
-    public UsuarioResponseDTO(String nome, Integer idade, String cpf) {
+    public UsuarioResponseDTO(String nome, Integer idade, String email) {
         this.nome = nome;
         this.idade = idade;
-        this.cpf = cpf;
+        this.email = email;
     }
 
     public UsuarioResponseDTO() {
@@ -30,11 +30,11 @@ public class UsuarioResponseDTO {
         this.idade = idade;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

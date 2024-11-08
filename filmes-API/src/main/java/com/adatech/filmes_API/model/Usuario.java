@@ -20,6 +20,9 @@ public class Usuario {
     @Column(name = "CPF", nullable = false, unique = true)
     private String cpf;
 
+    @Column(name = "PASSWORD")
+    private String password;
+
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
@@ -30,11 +33,12 @@ public class Usuario {
         this.dataHoraCriacao = LocalDateTime.now();
     }
 
-    public Usuario(Long id, String nome, Integer idade, String cpf, String email) {
+    public Usuario(Long id, String nome, Integer idade, String cpf, String password, String email) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.cpf = cpf;
+        this.password = password;
         this.email = email;
     }
 
@@ -84,5 +88,13 @@ public class Usuario {
 
     public void setDataHoraCriacao(LocalDateTime dataHoraCriacao) {
         this.dataHoraCriacao = dataHoraCriacao;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
