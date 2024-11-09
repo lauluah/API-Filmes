@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "FILME_API_RESPONSE")
+@Table(name = "FILME_BUSCADO")
 public class ApiFilme {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +22,8 @@ public class ApiFilme {
     @Column(name = "RUNTIME", nullable = false)
     private int runtime;
 
-//    @ElementCollection
-//    @CollectionTable(name = "GENRES", joinColumns = @JoinColumn(name = "FILME_API_RESPONSE_ID"))
-//    @Column(name = "GENRE")
-//    private List<String> genres;
+    @Column(name = "GENRES", nullable = false)
+    private String genres;
 
     @Column(name = "POPULARITY", nullable = false)
     private double popularity;
@@ -73,13 +71,13 @@ public class ApiFilme {
         this.runtime = runtime;
     }
 
-//    public List<String> getGenres() {
-//        return genres;
-//    }
-//
-//    public void setGenres(List<String> genres) {
-//        this.genres = genres;
-//    }
+    public String getGenres() {
+        return genres;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
 
     public double getPopularity() {
         return popularity;

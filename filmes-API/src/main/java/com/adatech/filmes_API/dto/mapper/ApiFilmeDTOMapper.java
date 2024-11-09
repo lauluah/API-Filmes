@@ -3,6 +3,7 @@ package com.adatech.filmes_API.dto.mapper;
 import com.adatech.filmes_API.dto.response.ApiFilmeResponseDTO;
 import com.adatech.filmes_API.model.ApiFilme;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ApiFilmeDTOMapper {
@@ -13,7 +14,7 @@ public class ApiFilmeDTOMapper {
         apiFilme.setOverview(dto.getDescricao());
         apiFilme.setReleaseDate(dto.getDataLancamento());
         apiFilme.setRuntime(dto.getDuracao());
-        //apiFilme.setGenres(dto.getGeneros().stream().map(ApiFilmeResponseDTO.Genero::getNome).collect(Collectors.toList()));
+        apiFilme.setGenres(String.join(", ", dto.getGeneros()));
         apiFilme.setPopularity(dto.getPopularidade());
         apiFilme.setOriginalLanguage(dto.getIdiomaOriginal());
         return apiFilme;
@@ -25,7 +26,7 @@ public class ApiFilmeDTOMapper {
         dto.setDescricao(entity.getOverview());
         dto.setDataLancamento(entity.getReleaseDate());
         dto.setDuracao(entity.getRuntime());
-        //dto.setGeneros(entity.getGenres().stream().map(ApiFilmeResponseDTO.Genero::new).collect(Collectors.toList()));
+        dto.setGeneros(Arrays.asList(entity.getGenres().split(", ")));
         dto.setPopularidade(entity.getPopularity());
         dto.setIdiomaOriginal(entity.getOriginalLanguage());
         return dto;

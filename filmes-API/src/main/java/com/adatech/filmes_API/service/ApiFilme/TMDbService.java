@@ -1,6 +1,9 @@
 package com.adatech.filmes_API.service.ApiFilme;
 
+import com.adatech.filmes_API.dto.mapper.ApiFilmeDTOMapper;
 import com.adatech.filmes_API.dto.response.ApiFilmeResponseDTO;
+import com.adatech.filmes_API.model.ApiFilme;
+import com.adatech.filmes_API.repository.ApiFilmeRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,15 +17,18 @@ public class TMDbService {
     private final String apiKey;
     private final String baseUrl;
     private final String format;
+    private final ApiFilmeRepository apiFilmeRepository;
 
     public TMDbService(RestTemplate restTemplate,
                        @Value("${tmdb.api.key}") String apiKey,
                        @Value("${service.endereco.host}") String baseUrl,
-                       @Value("${service.endereco.format}") String format) {
+                       @Value("${service.endereco.format}") String format,
+                       ApiFilmeRepository apiFilmeRepository) {
         this.restTemplate = restTemplate;
         this.apiKey = apiKey;
         this.baseUrl = baseUrl;
         this.format = format;
+        this.apiFilmeRepository = apiFilmeRepository;
     }
 
     public ApiFilmeResponseDTO obterDetalhesFilme(String title) {
@@ -30,14 +36,32 @@ public class TMDbService {
         TMDbResponse response = restTemplate.getForObject(url, TMDbResponse.class);
         if (response != null && !response.getResults().isEmpty()) {
             TMDbResponse.Result result = response.getResults().get(0);
+
+            String detailsUrl = String.format("%s/movie/%d?api_key=%s&format=%s", baseUrl, result.getId(), apiKey, format);
+            TMDbResponse.Result detailedResult = restTemplate.getForObject(detailsUrl, TMDbResponse.Result.class);
+
+            List<String> generos = detailedResult.getGenres().stream()
+                    .map(TMDbResponse.Genre::getName)
+                    .collect(Collectors.toList());
+
             return new ApiFilmeResponseDTO(
-                    result.getTitle(),
-                    result.getRelease_date(),
-                    result.getOverview(),
-                    result.getRuntime(),
-                    result.getPopularity(),
-                    result.getOriginal_language()
+                    detailedResult.getTitle(),
+                    detailedResult.getRelease_date(),
+                    detailedResult.getOverview(),
+                    detailedResult.getRuntime(),
+                    generos,
+                    detailedResult.getPopularity(),
+                    detailedResult.getOriginal_language()
             );
+        }
+        return null;
+    }
+
+    public ApiFilme salvarDetalhesFilme(String title) {
+        ApiFilmeResponseDTO filmeResponseDTO = obterDetalhesFilme(title);
+        if (filmeResponseDTO != null) {
+            ApiFilme apiFilme = ApiFilmeDTOMapper.toEntity(filmeResponseDTO);
+            return apiFilmeRepository.save(apiFilme);
         }
         return null;
     }
@@ -54,13 +78,22 @@ public class TMDbService {
         }
 
         private static class Result {
+            private int id;
             private String title;
             private String release_date;
             private String overview;
             private int runtime;
-            //private List<ApiFilmeResponseDTO.Genre> genres;
             private double popularity;
             private String original_language;
+            private List<Genre> genres;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
 
             public String getTitle() {
                 return title;
@@ -94,14 +127,6 @@ public class TMDbService {
                 this.runtime = runtime;
             }
 
-//            public List<ApiFilmeResponseDTO.Genre> getGenres() {
-//                return genres;
-//            }
-//
-//            public void setGenres(List<ApiFilmeResponseDTO.Genre> genres) {
-//                this.genres = genres;
-//            }
-
             public double getPopularity() {
                 return popularity;
             }
@@ -116,6 +141,35 @@ public class TMDbService {
 
             public void setOriginal_language(String original_language) {
                 this.original_language = original_language;
+            }
+
+            public List<Genre> getGenres() {
+                return genres;
+            }
+
+            public void setGenres(List<Genre> genres) {
+                this.genres = genres;
+            }
+        }
+
+        private static class Genre {
+            private int id;
+            private String name;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
             }
         }
     }

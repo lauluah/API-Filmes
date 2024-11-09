@@ -18,8 +18,8 @@ public class ApiFilmeResponseDTO {
     @JsonProperty("runtime")
     private int duracao;
 
-//    @JsonProperty("genres")
-//    private List<Genero> generos;
+    @JsonProperty("genres")
+    private List<String> generos;
 
     @JsonProperty("popularity")
     private double popularidade;
@@ -31,12 +31,12 @@ public class ApiFilmeResponseDTO {
     }
 
     public ApiFilmeResponseDTO(String titulo, String dataLancamento, String descricao, int duracao,
-                               double popularidade, String idiomaOriginal) {
+                               List<String> generos, double popularidade, String idiomaOriginal) {
         this.titulo = titulo;
         this.dataLancamento = dataLancamento;
         this.descricao = descricao;
         this.duracao = duracao;
-        //this.generos = generos;
+        this.generos = generos;
         this.popularidade = popularidade;
         this.idiomaOriginal = idiomaOriginal;
     }
@@ -73,13 +73,13 @@ public class ApiFilmeResponseDTO {
         this.duracao = duracao;
     }
 
-//    public List<Genero> getGeneros() {
-//        return generos;
-//    }
-//
-//    public void setGeneros(List<Genero> generos) {
-//        this.generos = generos;
-//    }
+    public List<String> getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(List<String> generos) {
+        this.generos = generos;
+    }
 
     public double getPopularidade() {
         return popularidade;

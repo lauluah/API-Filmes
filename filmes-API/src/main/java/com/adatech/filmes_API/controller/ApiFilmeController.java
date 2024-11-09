@@ -1,6 +1,7 @@
 package com.adatech.filmes_API.controller;
 
 import com.adatech.filmes_API.dto.response.ApiFilmeResponseDTO;
+import com.adatech.filmes_API.model.ApiFilme;
 import com.adatech.filmes_API.service.ApiFilme.TMDbService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,16 +22,12 @@ public class ApiFilmeController {
         return ResponseEntity.status(HttpStatus.OK).body(filmeResponseDTO);
     }
 
-//    @GetMapping("/tmdb/nome/{title}")
-//    public ResponseEntity<ApiFilmeResponseDTO> obterDetalhesFilmeTMDb(@PathVariable String title) {
-//        ApiFilmeResponseDTO filmeResponseDTO = tmdbService.obterDetalhesFilme(title);
-//        return ResponseEntity.status(HttpStatus.OK).body(filmeResponseDTO);
-//    }
-//
-//    @GetMapping("/tmdb/genero/{genres}")
-//    public ResponseEntity<ApiFilmeResponseDTO[]> obterFilmesPorGenero(@PathVariable String genres) {
-//        ApiFilmeResponseDTO[] filmes = tmdbService.obterFilmesPorGenero(genres);
-//        return ResponseEntity.status(HttpStatus.OK).body(filmes);
-//    }
-
+    @PostMapping("/tmdb/nome/{title}")
+    public ResponseEntity<ApiFilme> salvarDetalhesFilmeTMDb(@PathVariable String title) {
+        ApiFilme apiFilme = tmdbService.salvarDetalhesFilme(title);
+        if (apiFilme != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(apiFilme);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 }

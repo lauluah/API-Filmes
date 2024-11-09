@@ -44,6 +44,10 @@ public class SecurityConfig {
                     req.requestMatchers(HttpMethod.GET, "/filmes/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/filmes/**").permitAll();
 
+                    req.requestMatchers(HttpMethod.GET, "/api/filmes/tmdb/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/api/filmes/tmdb/**").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/api/filmes/**").permitAll();
+
                 }).build();
     }
 }
