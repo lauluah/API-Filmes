@@ -4,7 +4,6 @@ import com.adatech.filmes_API.dto.response.ApiFilmeResponseDTO;
 import com.adatech.filmes_API.model.ApiFilme;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class ApiFilmeDTOMapper {
 

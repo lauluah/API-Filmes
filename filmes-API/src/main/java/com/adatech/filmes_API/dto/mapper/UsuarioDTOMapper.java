@@ -13,7 +13,6 @@ public class UsuarioDTOMapper {
         usuario.setCpf(criarUsuarioDTO.getCpf());
         usuario.setIdade(criarUsuarioDTO.getIdade());
         usuario.setPassword(criarUsuarioDTO.getPassword());
-        //usuario.setFilmeBuscado(ApiFilmeDTOMapper.toEntity(apiFilmeResponseDTO));
         return usuario;
     }
 

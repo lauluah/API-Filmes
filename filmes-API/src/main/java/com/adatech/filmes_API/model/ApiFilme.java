@@ -1,7 +1,6 @@
 package com.adatech.filmes_API.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "FILME_BUSCADO")
@@ -13,7 +12,7 @@ public class ApiFilme {
     @Column(name = "TITLE", nullable = false)
     private String title;
 
-    @Column(name = "OVERVIEW", nullable = false)
+    @Column(name = "OVERVIEW", nullable = false, length = 1000)
     private String overview;
 
     @Column(name = "RELEASE_DATE", nullable = false)
