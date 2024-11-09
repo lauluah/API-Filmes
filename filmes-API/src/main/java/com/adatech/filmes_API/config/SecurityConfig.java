@@ -31,6 +31,12 @@ public class SecurityConfig {
 
                     req.requestMatchers(new AntPathRequestMatcher("/h2/**"))
                             .permitAll();
+
+                    try {
+                        http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                     req.requestMatchers(new AntPathRequestMatcher("/favicon.ico"))
                             .permitAll();
 
