@@ -7,6 +7,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,9 +34,9 @@ public class SecurityConfig {
                             .permitAll();
 
                     try {
-                        http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+                        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
                     } catch (Exception e) {
-                        throw new RuntimeException(e);
+                        throw new RuntimeException("Frame options configuration not supported", e);
                     }
                     req.requestMatchers(new AntPathRequestMatcher("/favicon.ico"))
                             .permitAll();
