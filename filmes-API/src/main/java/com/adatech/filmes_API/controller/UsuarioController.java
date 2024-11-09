@@ -3,6 +3,7 @@ package com.adatech.filmes_API.controller;
 import com.adatech.filmes_API.dto.request.CriarUsuarioDTO;
 import com.adatech.filmes_API.dto.response.UsuarioResponseDTO;
 import com.adatech.filmes_API.model.Usuario;
+import com.adatech.filmes_API.service.UsuarioService.AtualizarUsuarioComFilmeService;
 import com.adatech.filmes_API.service.UsuarioService.CriarUsuarioService;
 import com.adatech.filmes_API.service.UsuarioService.ObterUsuarioPorIDService;
 import com.adatech.filmes_API.service.UsuarioService.ObterUsuariosPorFiltroService;
@@ -22,11 +23,15 @@ public class UsuarioController {
     private final ObterUsuarioPorIDService obterUsuarioPorIdService;
     private final CriarUsuarioService criarUsuarioService;
     private final ObterUsuariosPorFiltroService obterUsuariosPorFiltro;
+    private final AtualizarUsuarioComFilmeService atualizarUsuarioComFilmeService;
 
-    public UsuarioController(ObterUsuarioPorIDService obterUsuarioPorIdService, CriarUsuarioService criarUsuarioService, ObterUsuariosPorFiltroService obterUsuariosPorFiltro) {
+    public UsuarioController(ObterUsuarioPorIDService obterUsuarioPorIdService, CriarUsuarioService criarUsuarioService,
+                             ObterUsuariosPorFiltroService obterUsuariosPorFiltro,
+                             AtualizarUsuarioComFilmeService atualizarUsuarioComFilmeService) {
         this.obterUsuarioPorIdService = obterUsuarioPorIdService;
         this.criarUsuarioService = criarUsuarioService;
         this.obterUsuariosPorFiltro = obterUsuariosPorFiltro;
+        this.atualizarUsuarioComFilmeService = atualizarUsuarioComFilmeService;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -45,6 +50,11 @@ public class UsuarioController {
         return obterUsuariosPorFiltro.obterUsuarioPorNome(nome);
     }
 
+//    @GetMapping("/genero")
+//    public List<Usuario> obterUsuariosPorGenero(@RequestParam String genero) {
+//        return obterUsuariosPorFiltro.obterUsuarioPorGenero(genero);
+//    }
+
     @GetMapping("/cpf")
     public Usuario obterUsuariosPorCpf(@RequestParam String cpf) {
         return obterUsuariosPorFiltro.obterUsuarioPorCpf(cpf);
@@ -53,5 +63,11 @@ public class UsuarioController {
     @GetMapping("/email")
     public Usuario ObterUsuarioPorEmail(@RequestParam String email) {
         return obterUsuariosPorFiltro.obterUsuarioPorEmail(email);
+    }
+
+    @PutMapping("/{id}/filme")
+    public ResponseEntity<Usuario> atualizarUsuarioComFilme(@PathVariable Long id, @RequestParam String title) {
+        Usuario usuarioAtualizado = atualizarUsuarioComFilmeService.atualizarUsuarioComFilme(id, title);
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioAtualizado);
     }
 }
