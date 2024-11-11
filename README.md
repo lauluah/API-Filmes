@@ -1,7 +1,6 @@
-Adição de README
 <div align="center">
   <img alt="Ada" style="border-radius: 50%; width: 50px;" src="ImagensReadme/Ada.png">
-  <h1 style="font-size: 20px;"><b>API REST - FILMS</b></h1>
+  <h1 style="font-size: 20px;"><b>REST API - JAVA SPRING BOOT </b></h1>
 </div>
 
 <h1 align="center">
@@ -20,19 +19,133 @@ Construir uma API REST com os seguintes itens:
 - Opcionais: implementação de Swagger e Front-end.
 
 ## Descrição do Projeto
+O projeto é uma aplicação desenvolvida em Java utilizando o framework Spring Boot. Foi desenvolvida uma API RESTful para consultar informações sobre filmes, e também inclui funcionalidades de persistência de dados, segurança e consumo da API externa pública do [The Movie Database (TMDb)](https://www.themoviedb.org/).
 
-## Guia de Uso
+### Principais Funcionalidades
+1. **Persistência em Banco de Dados**:
+    - Utilização do banco de dados H2 em memória para armazenamento temporário dos dados.
 
-## Linguagem de Programação
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+2. **Console H2**:
+    - Acesso ao console H2 para visualização e manipulação dos dados armazenados no banco de dados em memória.
 
-## Framework Utilizado
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+3. **Configuração de Segurança**:
+     - Implementação de controle de rota e autenticação básica com login e senha.
+
+4. **Consumo de API Externa**:
+     - Integração com a API pública do The Movie Database (TMDb) para obter informações sobre filmes.
+
+## Linguagem de Programação e Framework Utilizados
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
 
 ## Ferramentas Utilizadas
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
+## Guia de Uso
+1. **Clone o repositório para sua máquina local**:
+   ```sh
+   git clone https://github.com/lauluah/API-filmes.git
+   ```
+
+2. **Navegue até o diretório do projeto**:
+   ```sh
+   cd seu-repositorio
+   ```
+
+3. **Execute o comando para iniciar a aplicação**:
+   ```sh
+   ./mvnw spring-boot:run
+   ```
+
+4. **Acesse o console H2 para visualizar o banco de dados**:
+
+   Acesse `http://localhost:8080/h2` em seu navegador. Utilize as seguintes credenciais para login:
+   - **JDBC URL**: `jdbc:h2:mem:test`
+   - **User Name**: `adatech`
+   - **Password**: `54321`
+
+5. **Interaja com a aplicação e com a API REST**
+
+    - Cadastre usuários e filmes no banco de dados e consulte as informações utilizando as rotas disponíveis. 
+    - Envie requisições à API externa para buscar informações sobre filmes.
+    - Utilize uma ferramenta HTTP Client, como [Postman](https://www.postman.com/) ou [Insomnia](https://insomnia.rest/).
+      - URL base: `http://localhost:8080` (ou de acordo com a porta configurada na máquina).
+
+### EXEMPLOS DE REQUISIÇÕES
+#### Criar um Usuário no Banco de Dados
+- **Endpoint**: `http://localhost:8080/usuarios`
+- **Método**: POST
+- **Corpo da Requisição**:
+  ```json
+  {
+    "nome": "Nome do Usuário",
+    "idade": "Idade do Usuário",
+    "cpf": "CPF do Usuário", //(necessário ser um CPF válido)
+    "password": "Senha do Usuário",
+    "email": "Email do Usuário"
+    }
+  
+#### Buscar Informações de um Usuário Criado
+- **Endpoint**: `/usuarios/{id}`
+- **Autorizar com login e senha**: email e senha do usuário criado
+- **Método**: GET
+- **Exemplo de Requisição**:
+  ```sh
+  curl -X GET  http://localhost:8080/usuarios/1
+  ```
+- É possível buscar o usuário pelos seguintes dados: {id}, {nome}, {email} e {cpf} (basta substituir o valor final do parâmetro na URL).
+  
+#### Criar um Filme no Banco de Dados
+- **Endpoint**: `/filmes`
+- **Método**: POST
+- **Corpo da Requisição**:
+  ```json
+  {
+    "nomeFilme": "Nome do Filme",
+    "genero": "Gênero do Filme",
+    "nota": "Nota do Filme",
+    "comentario": "Comentário do Filme",
+    "corAvaliacao": "Cor da Avaliação do Filme" //azul, verde, amarelo ou vermelho
+  }
+  ```
+#### Buscar Informações de um Filme Criado
+- **Endpoint**: `/filmes/nomeFilme?nome={nomeFilme}`
+- **Método**: GET
+- **Exemplo de Requisição**:
+  ```sh
+  curl -X GET  http://localhost:8080/filmes/nomeFilme?nome={nomeFilme}
+  ```
+- É possível buscar o filme criado pelos seguintes dados: {id}, {nome}, {gênero}, {cor da avaliação} e {nota} (basta substituir o valor final do parâmetro na URL).
+
+#### Buscar Filme pelo Nome na API Externa
+- **Endpoint**: `/api/filmes/tmdb/nome/{nomeFilme}`
+- **Método**: GET
+- **Exemplo de Requisição**:
+  ```sh
+  curl -X GET  http://localhost:8080/api/filmes/tmdb/nome/Matrix
+  ```
+- Será retornado um JSON com as seguinte informações sobre o filme buscado: título, sinopse, data de lançamento, tempo de duração, gênero, popularidade e idioma original.
+
+#### Popular o Banco de Dados com Filmes da API Externa
+- **Endpoint**: `/api/filmes/tmdb/nome/{nomeFilme}`
+- **Método**: POST
+- **Exemplo de Requisição**:
+  ```sh
+  curl -X POST  http://localhost:8080/api/filmes/tmdb/nome/Inception
+  ```
+
+##  Entregas do Projeto
+- [x] Código fonte: API REST em Java com Spring Boot com persistência de dados, configuração de segurança com login e senha e consumo de API externa
+- [x] Documentação com descrição do projeto e guia de uso
+- [x] Apresentação do código, da documentação e da aplicação em funcionamento
+
+## O Que Não Foi Entregue
+- [ ] Implementação de Swagger
+- [ ] Autenticação JWT
+
 ## Principais Desafios Encontrados
+- **Persistência de Dados**: Configurar o banco de dados H2 e realizar operações CRUD.
+- **Integração com API Externa**: Aprender a consumir uma API externa e tratar os dados recebidos.
+- **Configuração de Segurança**: Implementar controle de rota e autenticação básica.
 
 ## Integrantes
 <table align="center" style="width: 80%;">
