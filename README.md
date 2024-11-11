@@ -179,6 +179,8 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
   ```sh
   curl -X POST  http://localhost:8080/api/filmes/tmdb/nome/Inception
   ```
+## Diagrama de Classes
+<img style="border-radius: 5%;" src="ImagensReadme/diagrama.jpg" height="300px" width="400px;" alt="Diagrama de Classes"/><br />
 
 ## Entregas do Projeto
 
@@ -187,6 +189,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - [x] Documentação com descrição do projeto e guia de uso
 - [x] Apresentação do código, da documentação e da aplicação em funcionamento
 - [x] Implementação inicial do Front-end
+- [x] Diagrama de classes
 
 ## O Que Não Foi Entregue
 
