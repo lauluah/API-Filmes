@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/filmes")
+@CrossOrigin(origins = "http://localhost:63342")
 public class ApiFilmeController {
     private final TMDbService tmdbService;
 

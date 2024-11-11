@@ -12,8 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:63342")
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
@@ -43,11 +46,6 @@ public class UsuarioController {
     public List<Usuario> obterUsuariosPorNome(@RequestParam String nome) {
         return obterUsuariosPorFiltro.obterUsuarioPorNome(nome);
     }
-
-//    @GetMapping("/genero")
-//    public List<Usuario> obterUsuariosPorGenero(@RequestParam String genero) {
-//        return obterUsuariosPorFiltro.obterUsuarioPorGenero(genero);
-//    }
 
     @GetMapping("/cpf")
     public Usuario obterUsuariosPorCpf(@RequestParam String cpf) {
