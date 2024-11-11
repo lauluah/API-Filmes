@@ -4,6 +4,7 @@ import com.adatech.filmes_API.dto.request.CriarFilmeDTO;
 import com.adatech.filmes_API.dto.response.FilmeResponseDTO;
 import com.adatech.filmes_API.model.Filme;
 import com.adatech.filmes_API.service.FilmeService.CriarFilmeService;
+import com.adatech.filmes_API.service.FilmeService.DeletarFilmeService;
 import com.adatech.filmes_API.service.FilmeService.ObterFilmePorFiltrosService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -17,10 +18,12 @@ import java.util.List;
 public class FilmeController {
     private final CriarFilmeService criarFilmeService;
     private final ObterFilmePorFiltrosService obterfilmePorFiltrosService;
+    private final DeletarFilmeService deletarFilmeService;
 
-    public FilmeController(CriarFilmeService criarFilmeService, ObterFilmePorFiltrosService obterfilmePorFiltrosService) {
+    public FilmeController(CriarFilmeService criarFilmeService, ObterFilmePorFiltrosService obterfilmePorFiltrosService, DeletarFilmeService deletarFilmeService) {
         this.criarFilmeService = criarFilmeService;
         this.obterfilmePorFiltrosService = obterfilmePorFiltrosService;
+        this.deletarFilmeService = deletarFilmeService;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -40,8 +43,8 @@ public class FilmeController {
     }
 
     @GetMapping("/nomeFilme")
-    public List<Filme> obterFilmesPorNomeFilme(@RequestParam String nome) {
-        return obterfilmePorFiltrosService.obterFilmesPorNomeFilme(nome);
+    public List<Filme> obterFilmesPorNomeFilme(@RequestParam String nomeFilme) {
+        return obterfilmePorFiltrosService.obterFilmesPorNomeFilme(nomeFilme);
     }
 
     @GetMapping("/corAvaliacao")
@@ -52,5 +55,10 @@ public class FilmeController {
     @GetMapping("/nota")
     public List<Filme> obterFilmesPorNota(@RequestParam double nota) {
         return obterfilmePorFiltrosService.obterFilmesPorNota(nota);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarFilme(@PathVariable Long id) {
+        return deletarFilmeService.deletarFilme(id);
     }
 }
