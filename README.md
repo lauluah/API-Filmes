@@ -51,9 +51,9 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 <table align="center" style="width: 80%;">
   <tr>
     <td align="center" style="width: 20%;">
-<img style="border-radius: 5%;" src="ImagensReadme/fed1.jpg" height="180px" width="150px;" alt=""/><br />
+<img style="border-radius: 5%;" src="ImagensReadme/Front1.jpeg" height="190px" width="150px;" alt=""/><br />
     <td align="center" style="width: 20%;">
-<img style="border-radius: 5%;" src="ImagensReadme/fed2.jpg" height="180px" width="150px;" alt=""/><br />  </tr>
+<img style="border-radius: 5%;" src="ImagensReadme/Front2.jpeg" height="190px" width="150px;" alt=""/><br />  </tr>
 </table>
 
 ## Linguagem de Programação e Framework Utilizados
@@ -145,7 +145,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
     "genero": "Gênero do Filme",
     "nota": "Nota do Filme",
     "comentario": "Comentário do Filme",
-    "corAvaliacao": "Cor da Avaliação do Filme" //azul, verde, amarelo ou vermelho
+    "corAvaliacao": "Cor da Avaliação do Filme"  
   }
   ```
 
@@ -180,7 +180,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
   curl -X POST  http://localhost:8080/api/filmes/tmdb/nome/Inception
   ```
 ## Diagrama de Classes
-<img style="border-radius: 5%;" src="ImagensReadme/diagrama.jpg" height="300px" width="400px;" alt="Diagrama de Classes"/><br />
+<img style="border-radius: 5%;" src="ImagensReadme/diagrama.jpeg" height="300px" width="400px;" alt="Diagrama de Classes"/><br />
 
 ## Entregas do Projeto
 
