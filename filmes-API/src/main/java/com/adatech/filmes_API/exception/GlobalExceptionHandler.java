@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
         });
 
         error.setErrors(errors);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error); //400
     }
 
 

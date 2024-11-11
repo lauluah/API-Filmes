@@ -8,10 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -29,6 +25,8 @@ public class SecurityConfig {
                             .permitAll();
                     req.requestMatchers(HttpMethod.GET, "/usuarios/**")
                             .authenticated();
+                    req.requestMatchers(HttpMethod.DELETE, "/usuarios/**")
+                            .authenticated();
 
                     req.requestMatchers(new AntPathRequestMatcher("/h2/**"))
                             .permitAll();
@@ -43,6 +41,7 @@ public class SecurityConfig {
 
                     req.requestMatchers(HttpMethod.GET, "/filmes/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/filmes/**").permitAll();
+                    req.requestMatchers(HttpMethod.DELETE, "/filmes/**").permitAll();
 
                     req.requestMatchers(HttpMethod.GET, "/api/filmes/tmdb/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/api/filmes/tmdb/**").permitAll();
