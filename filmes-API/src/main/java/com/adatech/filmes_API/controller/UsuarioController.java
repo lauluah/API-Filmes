@@ -44,11 +44,6 @@ public class UsuarioController {
         return obterUsuariosPorFiltro.obterUsuarioPorNome(nome);
     }
 
-//    @GetMapping("/genero")
-//    public List<Usuario> obterUsuariosPorGenero(@RequestParam String genero) {
-//        return obterUsuariosPorFiltro.obterUsuarioPorGenero(genero);
-//    }
-
     @GetMapping("/cpf")
     public Usuario obterUsuariosPorCpf(@RequestParam String cpf) {
         return obterUsuariosPorFiltro.obterUsuarioPorCpf(cpf);
