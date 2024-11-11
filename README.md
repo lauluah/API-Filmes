@@ -4,7 +4,7 @@
 </div>
 
 <h1 align="center">
-<img alt="Santander Coders" src="https://ada-strapi-production.s3.sa-east-1.amazonaws.com/Thumb_Meta_20_f25502065b.png" width="300" height="180">
+<img alt="Santander Coders" src="https://ada-strapi-production.s3.sa-east-1.amazonaws.com/Thumb_Meta_20_f25502065b.png" width="330" height="200">
 </h1></h1>
 
 <div align="center">
@@ -51,9 +51,9 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 <table align="center" style="width: 80%;">
   <tr>
     <td align="center" style="width: 20%;">
-<img style="border-radius: 5%;" src="ImagensReadme/Front1.jpeg" height="190px" width="150px;" alt=""/><br />
+<img style="border-radius: 5%;" src="ImagensReadme/Front1.jpeg" height="290px" width="280px;" alt=""/><br />
     <td align="center" style="width: 20%;">
-<img style="border-radius: 5%;" src="ImagensReadme/Front2.jpeg" height="190px" width="150px;" alt=""/><br />  </tr>
+<img style="border-radius: 5%;" src="ImagensReadme/Front2.jpeg" height="290px" width="280px;" alt=""/><br />  </tr>
 </table>
 
 ## Linguagem de Programação e Framework Utilizados
@@ -180,7 +180,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
   curl -X POST  http://localhost:8080/api/filmes/tmdb/nome/Inception
   ```
 ## Diagrama de Classes
-<img style="border-radius: 5%;" src="ImagensReadme/diagrama.jpeg" height="300px" width="400px;" alt="Diagrama de Classes"/><br />
+<img style="border-radius: 5%;" src="ImagensReadme/diagrama.jpeg" height="400px" width="460px;" alt="Diagrama de Classes"/><br />
 
 ## Entregas do Projeto
 
