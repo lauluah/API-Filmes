@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "USUARIO")
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,13 +15,13 @@ public class Usuario {
     private String nome;
 
     @Column(name = "IDADE", nullable = false)
-    private int idade;
-
-    @Column(name = "GENERO", nullable = false)
-    private String genero;
+    private Integer idade;
 
     @Column(name = "CPF", nullable = false, unique = true)
     private String cpf;
+
+    @Column(name = "PASSWORD")
+    private String password;
 
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
@@ -34,12 +33,12 @@ public class Usuario {
         this.dataHoraCriacao = LocalDateTime.now();
     }
 
-    public Usuario(Long id, String nome, int idade, String genero, String cpf, String email) {
+    public Usuario(Long id, String nome, Integer idade, String cpf, String password, String email) {
         this.id = id;
         this.nome = nome;
-        this.genero = genero;
         this.idade = idade;
         this.cpf = cpf;
+        this.password = password;
         this.email = email;
     }
 
@@ -59,24 +58,16 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public Integer getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(Integer idade) {
         this.idade = idade;
     }
 
     public LocalDateTime getDataHoraCriacao() {
         return dataHoraCriacao;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public String getCpf() {
@@ -98,4 +89,13 @@ public class Usuario {
     public void setDataHoraCriacao(LocalDateTime dataHoraCriacao) {
         this.dataHoraCriacao = dataHoraCriacao;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
