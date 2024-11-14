@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Usuario user = usuarioRepository.findByEmail(username).orElseThrow(() -> new UsuarioNaoEncontradoException(
                 "Login inválido"
         ));
-        return User.withDefaultPasswordEncoder() //codificador de senha
+        return User.withDefaultPasswordEncoder()
                 .username(username)
                 .password(user.getPassword())
                 .roles("USER")
