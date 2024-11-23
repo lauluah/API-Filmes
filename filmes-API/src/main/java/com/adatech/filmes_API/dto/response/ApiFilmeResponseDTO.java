@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-//Retorno da chamada para a API de filmes
 public class ApiFilmeResponseDTO {
     @JsonProperty("title")
     private String titulo;
