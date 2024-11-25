@@ -1,7 +1,10 @@
 package com.adatech.filmes_API.usuario;
 
+import com.adatech.filmes_API.dto.request.CriarUsuarioDTO;
+import com.adatech.filmes_API.dto.response.UsuarioResponseDTO;
 import com.adatech.filmes_API.model.Usuario;
 import com.adatech.filmes_API.repository.UsuarioRepository;
+import com.adatech.filmes_API.service.UsuarioService.CriarUsuarioService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Optional;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -22,6 +26,9 @@ public class usuarioUseCaseImplUnitTest {
 
     @MockBean
     private UsuarioRepository usuarioRepository;
+
+    @MockBean
+    private CriarUsuarioService criarUsuarioService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,7 +46,7 @@ public class usuarioUseCaseImplUnitTest {
                 .andDo(
                         MockMvcResultHandlers.print()
                 ).andExpect(
-                        MockMvcResultMatchers.status().isOk()
+                        status().isOk()
                 );
     }
 
@@ -56,7 +63,31 @@ public class usuarioUseCaseImplUnitTest {
                 .andDo(
                         MockMvcResultHandlers.print()
                 ).andExpect(
-                        MockMvcResultMatchers.status().isOk()
+                        status().isOk()
                 );
+    }
+
+    @Test
+    public void clienteNaoExiste_realizadoOCadastro_devoObterSucesso() throws Exception {
+        var usuarioJson = """
+                    {
+                          "nome": "Laura",
+                          "idade": 20,
+                          "email": "laura123@gmail.com",
+                          "password": "laurinha",
+                          "cpf": "27341883090"
+                      }
+                """;
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/usuarios")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(usuarioJson)
+        ).andDo(
+                MockMvcResultHandlers.print()
+        ).andExpect(
+                MockMvcResultMatchers.status().isCreated()
+        );
     }
 }

@@ -24,7 +24,7 @@ public class SecurityConfig {
                     req.requestMatchers(HttpMethod.POST, "/usuarios")
                             .permitAll();
                     req.requestMatchers(HttpMethod.GET, "/usuarios/**")
-                            .authenticated();
+                            .permitAll();
                     req.requestMatchers(HttpMethod.DELETE, "/usuarios/**")
                             .authenticated();
 
