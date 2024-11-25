@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Optional;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -90,4 +91,118 @@ public class usuarioUseCaseImplUnitTest {
                 MockMvcResultMatchers.status().isCreated()
         );
     }
+
+    @Test
+    public void clienteNaoExiste_realizadoOCadastroSemNome_devoObterFalha() throws Exception {
+        var usuarioJson = """
+                    {
+                          "nome": "",
+                          "idade": 20,
+                          "email": "laura123@gmail.com",
+                          "password": "laurinha",
+                          "cpf": "27341883090"
+                      }
+                """;
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/usuarios")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(usuarioJson)
+        ).andDo(
+                MockMvcResultHandlers.print()
+        ).andExpect(
+                MockMvcResultMatchers.status().isBadRequest()
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.errors.nome").value("O nome é obrigatório e não pode estar em branco.")
+        );
+    }
+
+    @Test
+    public void clienteNaoExiste_realizadoOCadastroComNomeMenorQueTres_devoObterFalha() throws Exception {
+        var usuarioJson = """
+                    {
+                          "nome": "la",
+                          "idade": 20,
+                          "email": "laura123@gmail.com",
+                          "password": "laurinha",
+                          "cpf": "27341883090"
+                      }
+                """;
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/usuarios")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(usuarioJson)
+        ).andDo(
+                MockMvcResultHandlers.print()
+        ).andExpect(
+                MockMvcResultMatchers.status().isBadRequest()
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.errors.nome").value("O nome deve ter entre 3 e 50 caracteres.")
+        );
+    }
+
+    @Test
+    public void clienteNaoExiste_realizadoOCadastroSemEmail_devoObterFalha() throws Exception {
+        var usuarioJson = """
+                    {
+                          "nome": "laura",
+                          "idade": 20,
+                          "email": "",
+                          "password": "laurinha",
+                          "cpf": "27341883090"
+                      }
+                """;
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/usuarios")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(usuarioJson)
+        ).andDo(
+                MockMvcResultHandlers.print()
+        ).andExpect(
+                MockMvcResultMatchers.status().isBadRequest()
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.errors.email").value("O email é obrigatório e não pode estar em branco.")
+        );
+    }
+
+    @Test
+    public void cadastroCliente_comEmailInvalido_deveRetornarErro() throws Exception {
+        var usuarioJson = """
+                    {
+                          "nome": "laura",
+                          "idade": 20,
+                          "email": "laura.gmailcom",
+                          "password": "laurinha",
+                          "cpf": "27341883090"
+                      }
+                """;
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/usuarios")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(usuarioJson)
+        ).andDo(
+                MockMvcResultHandlers.print()
+        ).andExpect(
+                MockMvcResultMatchers.status().isBadRequest()
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.errors.email").value("O formato do email está inválido. Verifique se o email está correto.")
+        );
+    }
+
+
 }
