@@ -1,4 +1,4 @@
-package com.adatech.filmes_API.ControllerTest.usuario;
+package com.adatech.filmes_API.controllerTest;
 
 import com.adatech.filmes_API.model.Usuario;
 import com.adatech.filmes_API.repository.UsuarioRepository;
