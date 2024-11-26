@@ -1,7 +1,5 @@
-package com.adatech.filmes_API.usuario;
+package com.adatech.filmes_API.ControllerTest.usuario;
 
-import com.adatech.filmes_API.dto.request.CriarUsuarioDTO;
-import com.adatech.filmes_API.dto.response.UsuarioResponseDTO;
 import com.adatech.filmes_API.model.Usuario;
 import com.adatech.filmes_API.repository.UsuarioRepository;
 import com.adatech.filmes_API.service.UsuarioService.CriarUsuarioService;
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -23,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class usuarioUseCaseImplUnitTest {
+public class UsuarioUseCaseImplUnitTest {
 
     @MockBean
     private UsuarioRepository usuarioRepository;
@@ -37,12 +36,14 @@ public class usuarioUseCaseImplUnitTest {
     @Test
     public void ClientePorEmail_realizoBusca_deveRetornarCliente() throws Exception {
         Usuario usuario = new Usuario();
-        usuario.setEmail("novo@email.com");
+        usuario.setEmail("laura123@gmail.com");
+        usuario.setPassword("laurinha");
 
-        Mockito.when(usuarioRepository.findByEmail("novo@email.com")).thenReturn(Optional.of(usuario));
+        Mockito.when(usuarioRepository.findByEmail("laura123@gmail.com")).thenReturn(Optional.of(usuario));
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/usuarios/email?email=novo@email.com")
+                        MockMvcRequestBuilders.get("/usuarios/email?email=laura123@gmail.com")
                                 .accept(MediaType.APPLICATION_JSON)
+                                .header(HttpHeaders.AUTHORIZATION, "Basic bGF1cmExMjNAZ21haWwuY29tOmxhdXJpbmhh")
                 )
                 .andDo(
                         MockMvcResultHandlers.print()
@@ -203,6 +204,4 @@ public class usuarioUseCaseImplUnitTest {
                 MockMvcResultMatchers.jsonPath("$.errors.email").value("O formato do email está inválido. Verifique se o email está correto.")
         );
     }
-
-
 }
