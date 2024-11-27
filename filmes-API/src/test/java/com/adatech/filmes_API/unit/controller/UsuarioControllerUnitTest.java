@@ -28,14 +28,14 @@ public class UsuarioControllerUnitTest {
         var usuarios = IntStream.range(0, 20)
                 .mapToObj(index -> {
                     var usuario = new Usuario();
-                    usuario.setNome("josé - " + index);
+                    usuario.setNome("luisa  " + index);
                     return usuario;
                 })
                 .collect(Collectors.toList());
 
-        Mockito.when(usuarioService.obterUsuarioPorNome("josé")).thenReturn(usuarios);
+        Mockito.when(usuarioService.obterUsuarioPorNome("luisa")).thenReturn(usuarios);
 
-        var listaDeUsuarios = controller.obterUsuariosPorNome("josé");
+        var listaDeUsuarios = controller.obterUsuariosPorNome("luisa");
 
         Assertions.assertEquals(usuarios.size(), listaDeUsuarios.size());
         Assertions.assertEquals(usuarios.getFirst().getNome(), listaDeUsuarios.getFirst().getNome());
