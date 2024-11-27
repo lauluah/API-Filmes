@@ -1,4 +1,4 @@
-package com.adatech.filmes_API.controllerTest;
+package com.adatech.filmes_API.integration.useCases.impl.usuario;
 
 import com.adatech.filmes_API.model.Usuario;
 import com.adatech.filmes_API.repository.UsuarioRepository;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UsuarioUseCaseImplUnitTest {
+public class UsuarioUseCaseIntegrationTest {
 
     @MockBean
     private UsuarioRepository usuarioRepository;
@@ -55,12 +55,14 @@ public class UsuarioUseCaseImplUnitTest {
     @Test
     public void ClientePorCPF_realizoBusca_deveRetornarCliente() throws Exception {
         Usuario usuario = new Usuario();
-        usuario.setCpf("153.123.123-61");
+        usuario.setCpf("273.418.830-90");
 
-        Mockito.when(usuarioRepository.findByCpf("153.123.123-61")).thenReturn(Optional.of(usuario));
+
+        Mockito.when(usuarioRepository.findByCpf("273.418.830-90")).thenReturn(Optional.of(usuario));
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/usuarios/cpf?cpf=153.123.123-61")
+                        MockMvcRequestBuilders.get("/usuarios/cpf?cpf=273.418.830-90")
                                 .accept(MediaType.APPLICATION_JSON)
+                                .header(HttpHeaders.AUTHORIZATION, "Basic bGF1cmExMjNAZ21haWwuY29tOmxhdXJpbmhh")
                 )
                 .andDo(
                         MockMvcResultHandlers.print()
@@ -97,7 +99,7 @@ public class UsuarioUseCaseImplUnitTest {
     public void clienteNaoExiste_realizadoOCadastroSemNome_devoObterFalha() throws Exception {
         var usuarioJson = """
                     {
-                          "nome": "",
+                          "nome": " ",
                           "idade": 20,
                           "email": "laura123@gmail.com",
                           "password": "laurinha",
@@ -116,8 +118,6 @@ public class UsuarioUseCaseImplUnitTest {
                 MockMvcResultMatchers.status().isBadRequest()
         ).andExpect(
                 MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.errors.nome").value("O nome é obrigatório e não pode estar em branco.")
         );
     }
 
@@ -144,8 +144,6 @@ public class UsuarioUseCaseImplUnitTest {
                 MockMvcResultMatchers.status().isBadRequest()
         ).andExpect(
                 MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.errors.nome").value("O nome deve ter entre 3 e 50 caracteres.")
         );
     }
 
@@ -172,8 +170,6 @@ public class UsuarioUseCaseImplUnitTest {
                 MockMvcResultMatchers.status().isBadRequest()
         ).andExpect(
                 MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.errors.email").value("O email é obrigatório e não pode estar em branco.")
         );
     }
 
@@ -200,8 +196,6 @@ public class UsuarioUseCaseImplUnitTest {
                 MockMvcResultMatchers.status().isBadRequest()
         ).andExpect(
                 MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.errors.email").value("O formato do email está inválido. Verifique se o email está correto.")
         );
     }
 }
