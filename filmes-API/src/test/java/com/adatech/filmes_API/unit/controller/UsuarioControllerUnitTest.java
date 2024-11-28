@@ -24,7 +24,7 @@ public class UsuarioControllerUnitTest {
     private UsuarioController controller;
 
     @Test
-    public void clienteExistente_buscarPorNome_deveRetornarOCliente() {
+    public void clienteExistente_buscarPorNome_deveRetornarCliente() {
         var usuarios = IntStream.range(0, 20)
                 .mapToObj(index -> {
                     var usuario = new Usuario();

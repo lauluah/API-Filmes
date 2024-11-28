@@ -57,6 +57,10 @@ public class UsuarioUseCaseIntegrationTest {
         Usuario usuario = new Usuario();
         usuario.setCpf("273.418.830-90");
 
+        usuario.setEmail("laura123@gmail.com");
+        usuario.setPassword("laurinha");
+
+        Mockito.when(usuarioRepository.findByEmail("laura123@gmail.com")).thenReturn(Optional.of(usuario));
 
         Mockito.when(usuarioRepository.findByCpf("273.418.830-90")).thenReturn(Optional.of(usuario));
         mockMvc.perform(
