@@ -1,5 +1,6 @@
-package com.adatech.filmes_API.integration.useCases.impl.usuario;
+package com.adatech.filmes_API.integration.useCases.repository;
 
+import com.adatech.filmes_API.exception.UsuarioNaoEncontradoException;
 import com.adatech.filmes_API.model.Usuario;
 import com.adatech.filmes_API.repository.UsuarioRepository;
 import com.adatech.filmes_API.service.UsuarioService.CriarUsuarioService;
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,37 +38,35 @@ public class UsuarioUseCaseIntegrationTest {
     @Test
     public void ClientePorEmail_realizoBusca_deveRetornarCliente() throws Exception {
         Usuario usuario = new Usuario();
-        usuario.setEmail("laura123@gmail.com");
-        usuario.setPassword("laurinha");
+        usuario.setEmail("teste@gmail.com");
+        usuario.setPassword("teste123");
 
-        Mockito.when(usuarioRepository.findByEmail("laura123@gmail.com")).thenReturn(Optional.of(usuario));
+        Mockito.when(usuarioRepository.findByEmail("teste@gmail.com")).thenReturn(Optional.of(usuario));
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/usuarios/email?email=laura123@gmail.com")
-                                .accept(MediaType.APPLICATION_JSON)
-                                .header(HttpHeaders.AUTHORIZATION, "Basic bGF1cmExMjNAZ21haWwuY29tOmxhdXJpbmhh")
-                )
-                .andDo(
-                        MockMvcResultHandlers.print()
-                ).andExpect(
-                        status().isOk()
-                );
+                MockMvcRequestBuilders.get("/usuarios/email?email=teste@gmail.com")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, "Basic dGVzdGVAZ21haWwuY29tOnRlc3RlMTIz")
+        ).andDo(
+                MockMvcResultHandlers.print()
+        ).andExpect(
+                status().isOk()
+        );
     }
 
     @Test
     public void ClientePorCPF_realizoBusca_deveRetornarCliente() throws Exception {
         Usuario usuario = new Usuario();
+        usuario.setEmail("teste@gmail.com");
         usuario.setCpf("273.418.830-90");
+        usuario.setPassword("teste123");
 
-        usuario.setEmail("laura123@gmail.com");
-        usuario.setPassword("laurinha");
-
-        Mockito.when(usuarioRepository.findByEmail("laura123@gmail.com")).thenReturn(Optional.of(usuario));
+        Mockito.when(usuarioRepository.findByEmail("teste@gmail.com")).thenReturn(Optional.of(usuario));
 
         Mockito.when(usuarioRepository.findByCpf("273.418.830-90")).thenReturn(Optional.of(usuario));
         mockMvc.perform(
                         MockMvcRequestBuilders.get("/usuarios/cpf?cpf=273.418.830-90")
                                 .accept(MediaType.APPLICATION_JSON)
-                                .header(HttpHeaders.AUTHORIZATION, "Basic bGF1cmExMjNAZ21haWwuY29tOmxhdXJpbmhh")
+                                .header(HttpHeaders.AUTHORIZATION, "Basic dGVzdGVAZ21haWwuY29tOnRlc3RlMTIz")
                 )
                 .andDo(
                         MockMvcResultHandlers.print()
@@ -202,4 +202,47 @@ public class UsuarioUseCaseIntegrationTest {
                 MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
         );
     }
+
+    @Test
+    public void ClientePorEmail_naoEncontrado_deveRetornarErro() throws Exception {
+        Usuario usuario = new Usuario();
+        usuario.setEmail("teste@gmail.com");
+        usuario.setPassword("teste123");
+
+        Mockito.when(usuarioRepository.findByEmail("teste@gmail.com"))
+                .thenReturn(Optional.of(usuario))
+                .thenThrow(new UsuarioNaoEncontradoException("Não foi possível encontrar usuário com o email"));
+
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/usuarios/email?email=teste@gmail.com")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .header(HttpHeaders.AUTHORIZATION, "Basic dGVzdGVAZ21haWwuY29tOnRlc3RlMTIz")
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
+    public void ClientePorNome_realizoBusca_deveRetornarClientes() throws Exception {
+
+        Usuario usuario = new Usuario();
+        usuario.setNome("teste");
+        usuario.setEmail("teste@gmail.com");
+        usuario.setPassword("teste123");
+
+        Mockito.when(usuarioRepository.findByEmail("teste@gmail.com")).thenReturn(Optional.of(usuario));
+
+        Mockito.when(usuarioRepository.findByNomeContaining("teste")).thenReturn(List.of(usuario));
+
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/usuarios/nome?nome=teste")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .header(HttpHeaders.AUTHORIZATION, "Basic dGVzdGVAZ21haWwuY29tOnRlc3RlMTIz")
+                )
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].nome").value("teste"));
+    }
+
 }
