@@ -4,6 +4,7 @@ import com.adatech.filmes_API.exception.UsuarioNaoEncontradoException;
 import com.adatech.filmes_API.model.Usuario;
 import com.adatech.filmes_API.repository.UsuarioRepository;
 import com.adatech.filmes_API.service.UsuarioService.CriarUsuarioService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,44 +36,40 @@ public class UsuarioUseCaseIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void ClientePorEmail_realizoBusca_deveRetornarCliente() throws Exception {
-        Usuario usuario = new Usuario();
+    private Usuario usuario;
+
+    @BeforeEach
+    public void setUp() {
+        usuario = new Usuario();
         usuario.setEmail("teste@gmail.com");
         usuario.setPassword("teste123");
+        usuario.setCpf("273.418.830-90");
+    }
 
+    @Test
+    public void ClientePorEmail_realizoBusca_deveRetornarCliente() throws Exception {
         Mockito.when(usuarioRepository.findByEmail("teste@gmail.com")).thenReturn(Optional.of(usuario));
+
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/usuarios/email?email=teste@gmail.com")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, "Basic dGVzdGVAZ21haWwuY29tOnRlc3RlMTIz")
-        ).andDo(
-                MockMvcResultHandlers.print()
-        ).andExpect(
-                status().isOk()
-        );
+                        MockMvcRequestBuilders.get("/usuarios/email?email=teste@gmail.com")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .header(HttpHeaders.AUTHORIZATION, "Basic dGVzdGVAZ21haWwuY29tOnRlc3RlMTIz")
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
     }
 
     @Test
     public void ClientePorCPF_realizoBusca_deveRetornarCliente() throws Exception {
-        Usuario usuario = new Usuario();
-        usuario.setEmail("teste@gmail.com");
-        usuario.setCpf("273.418.830-90");
-        usuario.setPassword("teste123");
-
         Mockito.when(usuarioRepository.findByEmail("teste@gmail.com")).thenReturn(Optional.of(usuario));
-
         Mockito.when(usuarioRepository.findByCpf("273.418.830-90")).thenReturn(Optional.of(usuario));
+
         mockMvc.perform(
                         MockMvcRequestBuilders.get("/usuarios/cpf?cpf=273.418.830-90")
                                 .accept(MediaType.APPLICATION_JSON)
                                 .header(HttpHeaders.AUTHORIZATION, "Basic dGVzdGVAZ21haWwuY29tOnRlc3RlMTIz")
                 )
-                .andDo(
-                        MockMvcResultHandlers.print()
-                ).andExpect(
-                        status().isOk()
-                );
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -88,15 +85,12 @@ public class UsuarioUseCaseIntegrationTest {
                 """;
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/usuarios")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(usuarioJson)
-        ).andDo(
-                MockMvcResultHandlers.print()
-        ).andExpect(
-                MockMvcResultMatchers.status().isCreated()
-        );
+                        MockMvcRequestBuilders.post("/usuarios")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(usuarioJson)
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
     @Test
@@ -112,17 +106,13 @@ public class UsuarioUseCaseIntegrationTest {
                 """;
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/usuarios")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(usuarioJson)
-        ).andDo(
-                MockMvcResultHandlers.print()
-        ).andExpect(
-                MockMvcResultMatchers.status().isBadRequest()
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
-        );
+                        MockMvcRequestBuilders.post("/usuarios")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(usuarioJson)
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos"));
     }
 
     @Test
@@ -138,17 +128,13 @@ public class UsuarioUseCaseIntegrationTest {
                 """;
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/usuarios")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(usuarioJson)
-        ).andDo(
-                MockMvcResultHandlers.print()
-        ).andExpect(
-                MockMvcResultMatchers.status().isBadRequest()
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
-        );
+                        MockMvcRequestBuilders.post("/usuarios")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(usuarioJson)
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos"));
     }
 
     @Test
@@ -164,17 +150,13 @@ public class UsuarioUseCaseIntegrationTest {
                 """;
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/usuarios")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(usuarioJson)
-        ).andDo(
-                MockMvcResultHandlers.print()
-        ).andExpect(
-                MockMvcResultMatchers.status().isBadRequest()
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
-        );
+                        MockMvcRequestBuilders.post("/usuarios")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(usuarioJson)
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos"));
     }
 
     @Test
@@ -190,25 +172,17 @@ public class UsuarioUseCaseIntegrationTest {
                 """;
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/usuarios")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(usuarioJson)
-        ).andDo(
-                MockMvcResultHandlers.print()
-        ).andExpect(
-                MockMvcResultMatchers.status().isBadRequest()
-        ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos")
-        );
+                        MockMvcRequestBuilders.post("/usuarios")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(usuarioJson)
+                ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.mensagem").value("Erro de validação nos campos"));
     }
 
     @Test
     public void ClientePorEmail_naoEncontrado_deveRetornarErro() throws Exception {
-        Usuario usuario = new Usuario();
-        usuario.setEmail("teste@gmail.com");
-        usuario.setPassword("teste123");
-
         Mockito.when(usuarioRepository.findByEmail("teste@gmail.com"))
                 .thenReturn(Optional.of(usuario))
                 .thenThrow(new UsuarioNaoEncontradoException("Não foi possível encontrar usuário com o email"));
@@ -220,19 +194,12 @@ public class UsuarioUseCaseIntegrationTest {
                 )
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isNotFound());
-
     }
 
     @Test
     public void ClientePorNome_realizoBusca_deveRetornarClientes() throws Exception {
-
-        Usuario usuario = new Usuario();
         usuario.setNome("teste");
-        usuario.setEmail("teste@gmail.com");
-        usuario.setPassword("teste123");
-
         Mockito.when(usuarioRepository.findByEmail("teste@gmail.com")).thenReturn(Optional.of(usuario));
-
         Mockito.when(usuarioRepository.findByNomeContaining("teste")).thenReturn(List.of(usuario));
 
         mockMvc.perform(
@@ -244,5 +211,4 @@ public class UsuarioUseCaseIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].nome").value("teste"));
     }
-
 }
