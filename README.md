@@ -203,6 +203,22 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - **Configuração de Segurança**: Implementar controle de rota e autenticação básica.
 - **Front-end**: Desenvolver a interface do usuário para interagir com a aplicação e implementar a comunicação com o
   back-end.
+  
+## **Testes Automatizados**  
+Nosso projeto conta com **testes unitários**, **testes de integração** e **testes end-to-end** para garantir a qualidade e a confiabilidade do sistema.
+
+<img src="https://hermes.dio.me/assets/articles/7057c5f3-4df0-4a41-a913-bd7d6eafa7e4.png" alt="Testes Automatizados" width="500" height="300">
+
+### **Como executar os testes**
+1. Navegue até o pacote de testes no projeto (`src/test/java`).  
+2. Clique com o botão direito em `com.adatech.filmes_API`.  
+3. Selecione a opção **"Run tests in com.adatech.filmes_API"** para executar todos os testes de uma vez.  
+   - **Alternativamente**: Você pode rodar os testes individualmente, acessando as classes de teste específicas e clicando em **"Run"** na barra lateral.
+
+### **Cobertura dos testes**
+- **Unitários**: Validam métodos isolados em classes específicas.  
+- **Integração**: Testam a interação entre diferentes partes do sistema.  
+- **End-to-end**: Verificam o comportamento completo da aplicação, simulando fluxos reais.
 
 ## Integrantes
 
