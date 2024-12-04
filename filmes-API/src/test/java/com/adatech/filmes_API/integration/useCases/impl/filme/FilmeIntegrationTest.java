@@ -79,4 +79,26 @@ public class FilmeIntegrationTest {
                 .andDo(print());
     }
 
+    @Test
+    public void obterFilmesPorCorAvaliacao_deveRetornar200() throws Exception {
+        Mockito.when(filmeRepository.findByCorAvaliacao("Verde")).thenReturn(List.of(filme));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/filmes/corAvaliacao")
+                        .param("corAvaliacao", "Verde")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    public void obterFilmesPorCorAvaliacao_naoExistente_deveRetornar404() throws Exception {
+        Mockito.when(filmeRepository.findByCorAvaliacao("Inexistente")).thenReturn(List.of());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/filmes/corAvaliacao")
+                        .param("corAvaliacao", "Inexistente")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
 }
