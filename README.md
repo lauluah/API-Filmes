@@ -8,17 +8,8 @@
 </h1></h1>
 
 <div align="center">
-<b><span style="font-size: 18px;">Módulo 5: Programação Web II </span></b><br>Projeto desenvolvido pelo grupo 5 da turma 1173 do programa <b>Santander Coders</b> 2024.1 em parceria com a <b>Ada Tech</b>
+<b><span style="font-size: 18px;">Módulos 5 e 6: Programação Web II e Testes Automatizados I</span></b><br>Projeto desenvolvido pelo grupo 5 da turma 1173 do programa <b>Santander Coders</b> 2024.1 em parceria com a <b>Ada Tech</b>
 </div>
-
-## Objetivos do Projeto
-
-Construir uma API REST com os seguintes itens:
-
-- Persistência em banco de dados (H2 ou Postgres);
-- Configuração de segurança: controle de rota e login (jwt opcional);
-- Consumo de uma API externa pública;
-- Opcionais: implementação de Swagger e Front-end.
 
 ## Descrição do Projeto
 
@@ -27,6 +18,8 @@ consultar informações sobre filmes, e também inclui funcionalidades de persis
 externa pública do [The Movie Database (TMDb)](https://www.themoviedb.org/).
 
 Também foi desenvolvida uma implementação inicial de front-end para que usuário possa interagir com a aplicação.
+
+Além disso, também foram desenvolvidos os testes automatizados para garantir a qualidade e a confiabilidade da aplicação. Os testes foram desenvolvidos utilizando o framework JUnit e a biblioteca Mockito para simulação de dependências.
 
 ### Principais Funcionalidades
 
@@ -56,9 +49,29 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 <img style="border-radius: 5%;" src="ImagensReadme/Front2.jpeg" height="290px" width="280px;" alt=""/><br />  </tr>
 </table>
 
-## Linguagem de Programação e Framework Utilizados
+## Objetivos do Projeto
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+O projeto atual foi desenvolvido ao longo dos módulos 5 e 6 da formação, sendo os objetivos de cada módulo os seguintes:
+
+### MÓDULO 5 - Construir uma API REST com os seguintes itens:
+
+- Persistência em banco de dados (H2 ou Postgres);
+- Configuração de segurança: controle de rota e login (jwt opcional);
+- Consumo de uma API externa pública;
+- Opcionais: implementação de Swagger e Front-end.
+
+### MÓDULO 6 - Criação dos Testes Automatizados da Aplicação
+
+Os principais tipos de testes implementados incluem:
+- **Testes Unitários:** Verificação do comportamento de unidades individuais de código, como serviços e controladores, de forma isolada.
+- **Testes de Integração:** Validação da interação entre diferentes componentes da aplicação e a integração com o banco de dados.
+- **Testes de Integração com API Externa:** Garantia de que a integração com a API do TMDb funciona corretamente e retorna os dados esperados.
+
+A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
+
+## Linguagem de Programação e Frameworks Utilizados
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)![JUnit 5](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)![Mockito](https://img.shields.io/badge/Mockito-25A162.svg?style=for-the-badge&logo=Mockito&logoColor=white)![WireMock](https://img.shields.io/badge/WireMock-8A2BE2.svg?style=for-the-badge&logo=WireMock&logoColor=white)
 
 ## Ferramentas Utilizadas
 
@@ -98,7 +111,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 
 ### EXEMPLOS DE REQUISIÇÕES
 
-#### Criar um Usuário no Banco de Dados
+#### 1. Criar um Usuário no Banco de Dados
 
 - **Endpoint**: `http://localhost:8080/usuarios`
 - **Método**: POST
@@ -112,7 +125,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
     "email": "Email do Usuário"
     }
 
-#### Buscar Informações de um Usuário Criado
+#### 2. Buscar Informações de um Usuário Criado
 
 - **Endpoint**: `/usuarios/{id}`
 - **Autorizar com login e senha**: email e senha do usuário criado
@@ -124,7 +137,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - É possível buscar o usuário pelos seguintes dados: {id}, {nome}, {email} e {cpf} (basta substituir o valor final do
   parâmetro na URL).
 
-#### Deletar um Usuário do Banco de Dados
+#### 3. Deletar um Usuário do Banco de Dados
 
 - **Endpoint**: `/usuarios/{id}`
 - **Autorizar com login e senha**: email e senha do usuário criado
@@ -134,7 +147,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
   curl -X DELETE  http://localhost:8080/usuarios/1
   ```
 
-#### Criar um Filme no Banco de Dados
+#### 4. Criar um Filme no Banco de Dados
 
 - **Endpoint**: `/filmes`
 - **Método**: POST
@@ -149,7 +162,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
   }
   ```
 
-#### Buscar Informações de um Filme Criado
+#### 5. Buscar Informações de um Filme Criado
 
 - **Endpoint**: `/filmes/nomeFilme?nome={nomeFilme}`
 - **Método**: GET
@@ -160,7 +173,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - É possível buscar o filme criado pelos seguintes dados: {id}, {nome}, {gênero}, {cor da avaliação} e {nota} (basta
   substituir o valor final do parâmetro na URL).
 
-#### Buscar Filme pelo Nome na API Externa
+#### 6. Buscar Filme pelo Nome na API Externa
 
 - **Endpoint**: `/api/filmes/tmdb/nome/{nomeFilme}`
 - **Método**: GET
@@ -171,7 +184,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - Será retornado um JSON com as seguinte informações sobre o filme buscado: título, sinopse, data de lançamento, tempo
   de duração, gênero, popularidade e idioma original.
 
-#### Popular o Banco de Dados com Filmes da API Externa
+#### 7. Popular o Banco de Dados com Filmes da API Externa
 
 - **Endpoint**: `/api/filmes/tmdb/nome/{nomeFilme}`
 - **Método**: POST
@@ -190,6 +203,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - [x] Apresentação do código, da documentação e da aplicação em funcionamento
 - [x] Implementação inicial do Front-end
 - [x] Diagrama de classes
+- [x] Testes automatizados
 
 ## O Que Não Foi Entregue
 
@@ -203,6 +217,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - **Configuração de Segurança**: Implementar controle de rota e autenticação básica.
 - **Front-end**: Desenvolver a interface do usuário para interagir com a aplicação e implementar a comunicação com o
   back-end.
+- **Testes Automatizados**: Entender como testar a lógica da aplicação (e não código) e pensar em cenários de teste.
 
 ## Integrantes
 
