@@ -1,6 +1,5 @@
 package com.adatech.filmes_API.integration.useCases.impl.filme;
 
-import com.adatech.filmes_API.dto.request.CriarFilmeDTO;
 import com.adatech.filmes_API.model.Filme;
 import com.adatech.filmes_API.repository.FilmeRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -96,6 +95,26 @@ public class FilmeIntegrationTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/filmes/corAvaliacao")
                         .param("corAvaliacao", "Inexistente")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
+    @Test
+    public void deletarFilme_deveRetornar200() throws Exception {
+        Mockito.when(filmeRepository.existsById(1L)).thenReturn(true);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/filmes/1")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    public void deletarFilme_naoExistente_deveRetornar404() throws Exception {
+        Mockito.when(filmeRepository.existsById(2L)).thenReturn(false);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/filmes/2")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andDo(print());

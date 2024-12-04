@@ -17,7 +17,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CriarFilmeServiceTest {
+class CriarFilmeServiceUnitTest {
 
     @InjectMocks
     CriarFilmeService criarFilmeService;
