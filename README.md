@@ -62,20 +62,18 @@ O projeto atual foi desenvolvido ao longo dos módulos 5 e 6 da formação, send
 
 ### MÓDULO 6 - Criação dos Testes Automatizados da Aplicação
 
-Os principais tipos de testes implementados incluem:
+Tipos de testes implementados incluem:
 - **Testes Unitários:** Verificação do comportamento de unidades individuais de código, como serviços e controladores, de forma isolada.
 - **Testes de Integração:** Validação da interação entre diferentes componentes da aplicação e a integração com o banco de dados.
 - **Testes de Integração com API Externa:** Garantia de que a integração com a API do TMDb funciona corretamente e retorna os dados esperados.
 
-A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
+A cobertura mínima exigida dos testes foi de 60% do código da aplicação. E a implementação de testes end-to-end foi opcional.
 
-## Linguagem de Programação e Frameworks Utilizados
+## Ferramentas e Tecnologias Utilizadas
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)![JUnit 5](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)![Mockito](https://img.shields.io/badge/Mockito-25A162.svg?style=for-the-badge&logo=Mockito&logoColor=white)![WireMock](https://img.shields.io/badge/WireMock-8A2BE2.svg?style=for-the-badge&logo=WireMock&logoColor=white)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)![JUnit 5](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)![Mockito](https://img.shields.io/badge/Mockito-25A162.svg?style=for-the-badge&logo=Mockito&logoColor=white)
 
-## Ferramentas Utilizadas
-
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![WireMock](https://img.shields.io/badge/WireMock-8A2BE2.svg?style=for-the-badge&logo=WireMock&logoColor=white)![H2](https://img.shields.io/badge/H2-007396.svg?style=for-the-badge&logo=H2&logoColor=white)![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 ## Guia de Uso
 
@@ -111,7 +109,7 @@ A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
 
 ### EXEMPLOS DE REQUISIÇÕES
 
-#### 1. Criar um Usuário no Banco de Dados
+#### a) Criar um Usuário no Banco de Dados
 
 - **Endpoint**: `http://localhost:8080/usuarios`
 - **Método**: POST
@@ -125,7 +123,7 @@ A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
     "email": "Email do Usuário"
     }
 
-#### 2. Buscar Informações de um Usuário Criado
+#### b) Buscar Informações de um Usuário Criado
 
 - **Endpoint**: `/usuarios/{id}`
 - **Autorizar com login e senha**: email e senha do usuário criado
@@ -137,7 +135,7 @@ A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
 - É possível buscar o usuário pelos seguintes dados: {id}, {nome}, {email} e {cpf} (basta substituir o valor final do
   parâmetro na URL).
 
-#### 3. Deletar um Usuário do Banco de Dados
+#### c) Deletar um Usuário do Banco de Dados
 
 - **Endpoint**: `/usuarios/{id}`
 - **Autorizar com login e senha**: email e senha do usuário criado
@@ -147,7 +145,7 @@ A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
   curl -X DELETE  http://localhost:8080/usuarios/1
   ```
 
-#### 4. Criar um Filme no Banco de Dados
+#### d) Criar um Filme no Banco de Dados
 
 - **Endpoint**: `/filmes`
 - **Método**: POST
@@ -162,7 +160,7 @@ A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
   }
   ```
 
-#### 5. Buscar Informações de um Filme Criado
+#### e) Buscar Informações de um Filme Criado
 
 - **Endpoint**: `/filmes/nomeFilme?nome={nomeFilme}`
 - **Método**: GET
@@ -173,7 +171,7 @@ A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
 - É possível buscar o filme criado pelos seguintes dados: {id}, {nome}, {gênero}, {cor da avaliação} e {nota} (basta
   substituir o valor final do parâmetro na URL).
 
-#### 6. Buscar Filme pelo Nome na API Externa
+#### f) Buscar Filme pelo Nome na API Externa
 
 - **Endpoint**: `/api/filmes/tmdb/nome/{nomeFilme}`
 - **Método**: GET
@@ -184,7 +182,7 @@ A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
 - Será retornado um JSON com as seguinte informações sobre o filme buscado: título, sinopse, data de lançamento, tempo
   de duração, gênero, popularidade e idioma original.
 
-#### 7. Popular o Banco de Dados com Filmes da API Externa
+#### g) Popular o Banco de Dados com Filmes da API Externa
 
 - **Endpoint**: `/api/filmes/tmdb/nome/{nomeFilme}`
 - **Método**: POST
@@ -203,7 +201,7 @@ A cobertura exigida dos testes foi de no mínimo 60% do código do projeto.
 - [x] Apresentação do código, da documentação e da aplicação em funcionamento
 - [x] Implementação inicial do Front-end
 - [x] Diagrama de classes
-- [x] Testes automatizados
+- [x] Testes automatizados: testes unitários e de integração
 
 ## O Que Não Foi Entregue
 
