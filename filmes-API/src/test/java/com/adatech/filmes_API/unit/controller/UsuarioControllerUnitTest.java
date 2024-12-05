@@ -33,7 +33,7 @@ public class UsuarioControllerUnitTest {
     private UsuarioController controller;
 
     @Test
-    public void clienteExistente_buscarPorNome_deveRetornarCliente() {
+    public void usuarioExistente_buscarPorNome_deveRetornarUsuario() {
         var usuarios = IntStream.range(0, 10)
                 .mapToObj(index -> {
                     var usuario = new Usuario();
@@ -62,10 +62,10 @@ public class UsuarioControllerUnitTest {
     }
 
     @Test
-    public void clienteInexistente_buscarPorNome_deveRetornarListaVazia() {
-        Mockito.when(usuarioServiceFiltros.obterUsuarioPorNome("inexistente")).thenReturn(Collections.emptyList());
+    public void usuarioInexistente_buscarPorNome_deveRetornarListaVazia() {
+        Mockito.when(usuarioServiceFiltros.obterUsuarioPorNome("teste")).thenReturn(Collections.emptyList());
 
-        var listaDeUsuarios = controller.obterUsuariosPorNome("inexistente");
+        var listaDeUsuarios = controller.obterUsuariosPorNome("teste");
 
         Assertions.assertTrue(listaDeUsuarios.isEmpty());
     }
@@ -142,10 +142,10 @@ public class UsuarioControllerUnitTest {
 
     @Test
     public void obterUsuarioPorNome_quandoNaoEncontrar_deveRetornarExcecao() {
-        Mockito.when(usuarioServiceFiltros.obterUsuarioPorNome("luisa")).thenThrow(new UsuarioNaoEncontradoException("Não foi possível encontrar usuários com o nome %s"));
+        Mockito.when(usuarioServiceFiltros.obterUsuarioPorNome("teste")).thenThrow(new UsuarioNaoEncontradoException("Não foi possível encontrar usuários com o nome %s"));
 
         Assertions.assertThrows(UsuarioNaoEncontradoException.class, () -> {
-            controller.obterUsuariosPorNome("luisa");
+            controller.obterUsuariosPorNome("teste");
         });
     }
 
@@ -168,7 +168,7 @@ public class UsuarioControllerUnitTest {
 
     @Test
     public void obterUsuarioPorEmail_quandoEmailInexistente_deveLancarExcecao() {
-        var email = "naoexiste@teste.com";
+        var email = "teste@gmail.com";
         Mockito.when(usuarioServiceFiltros.obterUsuarioPorEmail(email))
                 .thenThrow(new UsuarioNaoEncontradoException("Não foi possível encontrar usuário com o email " + email));
 
@@ -223,7 +223,7 @@ public class UsuarioControllerUnitTest {
     }
 
     @Test
-    public void obterUsuarioPorId_quandoIdExistente_deveRetornarExcecao() {
+    public void obterUsuarioPorId_quandoIdNaoExistente_deveRetornarExcecao() {
         Usuario usuario = new Usuario();
         usuario.setId(2L);
         Mockito.when(obterUsuarioPorIDService.execute(2L)).thenThrow(new UsuarioNaoEncontradoException("Não foi possível encontrar usuário com id"));

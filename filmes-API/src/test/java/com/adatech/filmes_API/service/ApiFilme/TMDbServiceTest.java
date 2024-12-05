@@ -41,7 +41,6 @@ public class TMDbServiceTest {
 
     @Test
     void testObterDetalhesFilme() {
-        // Configurando uma resposta simulada para a API externa
         wireMockServer.stubFor(WireMock.get(WireMock.urlEqualTo("/search/movie?query=Inception&api_key=mockApiKey&format=json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -66,7 +65,6 @@ public class TMDbServiceTest {
                                 """)
                         .withHeader("Content-Type", "application/json")));
 
-        // Simulação do endpoint de detalhes do filme
         wireMockServer.stubFor(WireMock.get(WireMock.urlEqualTo("/movie/123?api_key=mockApiKey&format=json"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
@@ -87,10 +85,9 @@ public class TMDbServiceTest {
                                 """)
                         .withHeader("Content-Type", "application/json")));
 
-        // Chamando o método a ser testado
+
         ApiFilmeResponseDTO response = tmdbService.obterDetalhesFilme("Inception");
 
-        // Validações
         assertEquals("Inception", response.getTitulo());
         assertEquals("2010-07-16", response.getDataLancamento());
         assertEquals(148, response.getDuracao());
