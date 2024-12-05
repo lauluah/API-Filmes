@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collections;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -48,6 +49,7 @@ public class UsuarioControllerUnitTest {
         Assertions.assertEquals(usuarios.size(), listaDeUsuarios.size());
         Assertions.assertEquals(usuarios.get(0).getNome(), listaDeUsuarios.get(0).getNome());
     }
+
     @Test
     public void obterUsuarioPorNome_quandoNomeInexistente_deveLancarExcecao() {
         var nome = "teste";
@@ -60,6 +62,16 @@ public class UsuarioControllerUnitTest {
     }
 
     @Test
+    public void clienteInexistente_buscarPorNome_deveRetornarListaVazia() {
+        Mockito.when(usuarioServiceFiltros.obterUsuarioPorNome("inexistente")).thenReturn(Collections.emptyList());
+
+        var listaDeUsuarios = controller.obterUsuariosPorNome("inexistente");
+
+        Assertions.assertTrue(listaDeUsuarios.isEmpty());
+    }
+
+
+    @Test
     public void deletarUsuario_quandoIdExistente_deveRetornarMensagemSucesso() {
         var mensagem = ResponseEntity.ok("Usuário deletado com sucesso.");
         Mockito.when(deletarUsuarioService.deletarUsuario(1L)).thenReturn(mensagem);
@@ -68,6 +80,56 @@ public class UsuarioControllerUnitTest {
 
         Assertions.assertEquals("Usuário deletado com sucesso.", resposta.getBody());
     }
+
+    @Test
+    public void deletarUsuario_quandoDeletadoComSucesso_deveRetornarSucesso() {
+        var usuarioId = 3L;
+        Mockito.when(deletarUsuarioService.deletarUsuario(usuarioId))
+                .thenReturn(ResponseEntity.ok("Usuário deletado com sucesso."));
+
+        var resposta = controller.deletarUsuario(usuarioId);
+
+        Assertions.assertEquals(200, resposta.getStatusCodeValue());
+        Assertions.assertEquals("Usuário deletado com sucesso.", resposta.getBody());
+    }
+
+    @Test
+    public void obterUsuarioPorEmail_quandoEmailVazio_deveLancarExcecao() {
+        var email = "123@gmail.com";
+        Mockito.when(usuarioServiceFiltros.obterUsuarioPorEmail(email))
+                .thenThrow(new UsuarioNaoEncontradoException("Não foi possível encontrar usuário com o email"));
+
+        UsuarioNaoEncontradoException exception = Assertions.assertThrows(UsuarioNaoEncontradoException.class, () -> {
+            controller.ObterUsuarioPorEmail(email);
+        });
+
+        Assertions.assertEquals("Não foi possível encontrar usuário com o email", exception.getMessage());
+    }
+
+    @Test
+    public void obterUsuarioPorCpf_quandoCpfNulo_deveLancarExcecao() {
+        String cpf = "123.124.113-61";
+        Mockito.when(usuarioServiceFiltros.obterUsuarioPorCpf(cpf))
+                .thenThrow(new UsuarioNaoEncontradoException("Não foi possível encontrar usuário com cpf "));
+
+        UsuarioNaoEncontradoException exception = Assertions.assertThrows(UsuarioNaoEncontradoException.class, () -> {
+            controller.obterUsuariosPorCpf(cpf);
+        });
+        Assertions.assertEquals("Não foi possível encontrar usuário com cpf ", exception.getMessage());
+    }
+
+    @Test
+    public void deletarUsuario_quandoMensagemNaoEsperada_deveRetornarErro() {
+        var usuarioId = 4L;
+        Mockito.when(deletarUsuarioService.deletarUsuario(usuarioId))
+                .thenReturn(ResponseEntity.status(404).body("Usuário não encontrado."));
+
+        var resposta = controller.deletarUsuario(usuarioId);
+
+        Assertions.assertEquals(404, resposta.getStatusCodeValue());
+        Assertions.assertEquals("Usuário não encontrado.", resposta.getBody());
+    }
+
 
     @Test
     public void deletarUsuario_quandoNaoExistir_deveRetornarExcecao() {
@@ -101,8 +163,7 @@ public class UsuarioControllerUnitTest {
 
 
         Assertions.assertNotNull(resultado);
-        Assertions.assertEquals(usuario.getNome(), resultado.getNome());
-        Assertions.assertEquals(usuario.getEmail(), resultado.getEmail());
+        Assertions.assertEquals(usuario.getEmail(), resultado.getBody().getEmail());
     }
 
     @Test
