@@ -37,7 +37,7 @@ public class FilmeIntegrationTest {
     }
 
     @Test
-    public void obterFilmePorId_deveRetornar200() throws Exception {
+    public void obterFilmePorId_deveRetornarSucesso() throws Exception {
         Mockito.when(filmeRepository.findById(1L)).thenReturn(Optional.of(filme));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/filmes/1")
@@ -47,7 +47,7 @@ public class FilmeIntegrationTest {
     }
 
     @Test
-    public void obterFilmePorId_naoExistente_deveRetornar404() throws Exception {
+    public void obterFilmePorId_naoExistente_deveRetornarNaoEncontrado() throws Exception {
         Mockito.when(filmeRepository.findById(2L)).thenReturn(Optional.empty());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/filmes/2")
@@ -57,7 +57,7 @@ public class FilmeIntegrationTest {
     }
 
     @Test
-    public void obterFilmesPorNome_deveRetornar200() throws Exception {
+    public void obterFilmesPorNome_deveRetornarSucesso() throws Exception {
         Mockito.when(filmeRepository.findByNomeFilmeContaining("John Wick")).thenReturn(List.of(filme));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/filmes/nomeFilme")
@@ -68,7 +68,7 @@ public class FilmeIntegrationTest {
     }
 
     @Test
-    public void obterFilmesPorNome_naoExistente_deveRetornar404() throws Exception {
+    public void obterFilmesPorNome_naoExistente_deveRetornarNaoEncontrado() throws Exception {
         Mockito.when(filmeRepository.findByNomeFilmeContaining("Inexistente")).thenReturn(List.of());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/filmes/nomeFilme")
@@ -79,7 +79,7 @@ public class FilmeIntegrationTest {
     }
 
     @Test
-    public void obterFilmesPorCorAvaliacao_deveRetornar200() throws Exception {
+    public void obterFilmesPorCorAvaliacao_deveRetornarSucesso() throws Exception {
         Mockito.when(filmeRepository.findByCorAvaliacao("Verde")).thenReturn(List.of(filme));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/filmes/corAvaliacao")
@@ -90,7 +90,7 @@ public class FilmeIntegrationTest {
     }
 
     @Test
-    public void obterFilmesPorCorAvaliacao_naoExistente_deveRetornar404() throws Exception {
+    public void obterFilmesPorCorAvaliacao_naoExistente_deveRetornarNaoEncontrado() throws Exception {
         Mockito.when(filmeRepository.findByCorAvaliacao("Inexistente")).thenReturn(List.of());
 
         mockMvc.perform(MockMvcRequestBuilders.get("/filmes/corAvaliacao")
@@ -101,7 +101,7 @@ public class FilmeIntegrationTest {
     }
 
     @Test
-    public void deletarFilme_deveRetornar200() throws Exception {
+    public void deletarFilme_deveRetornarSucesso() throws Exception {
         Mockito.when(filmeRepository.existsById(1L)).thenReturn(true);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/filmes/1")
@@ -111,7 +111,7 @@ public class FilmeIntegrationTest {
     }
 
     @Test
-    public void deletarFilme_naoExistente_deveRetornar404() throws Exception {
+    public void deletarFilme_naoExistente_deveRetornarNaoEncontrado() throws Exception {
         Mockito.when(filmeRepository.existsById(2L)).thenReturn(false);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/filmes/2")
