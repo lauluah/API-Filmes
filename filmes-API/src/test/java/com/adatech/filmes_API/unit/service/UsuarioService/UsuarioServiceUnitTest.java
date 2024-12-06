@@ -1,4 +1,4 @@
-package com.adatech.filmes_API.unit.service;
+package com.adatech.filmes_API.unit.service.UsuarioService;
 
 import com.adatech.filmes_API.dto.mapper.UsuarioDTOMapper;
 import com.adatech.filmes_API.dto.request.CriarUsuarioDTO;

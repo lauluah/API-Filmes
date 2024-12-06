@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class IUsuarioControllerIntegrationTest {
+public class UsuarioControllerIntegrationTest {
 
     @MockBean
     private UsuarioController usuarioController;
