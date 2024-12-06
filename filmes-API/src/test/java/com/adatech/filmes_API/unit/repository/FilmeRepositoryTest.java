@@ -1,6 +1,7 @@
-package com.adatech.filmes_API.repository;
+package com.adatech.filmes_API.unit.repository;
 
 import com.adatech.filmes_API.model.Filme;
+import com.adatech.filmes_API.repository.FilmeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

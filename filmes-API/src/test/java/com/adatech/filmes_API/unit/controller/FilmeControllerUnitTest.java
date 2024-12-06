@@ -1,5 +1,6 @@
-package com.adatech.filmes_API.controller;
+package com.adatech.filmes_API.unit.controller;
 
+import com.adatech.filmes_API.controller.FilmeController;
 import com.adatech.filmes_API.dto.request.CriarFilmeDTO;
 import com.adatech.filmes_API.dto.response.FilmeResponseDTO;
 import com.adatech.filmes_API.model.Filme;
