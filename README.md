@@ -71,9 +71,9 @@ A cobertura mínima exigida dos testes foi de 60% do código da aplicação. E a
 
 ## Ferramentas e Tecnologias Utilizadas
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)![JUnit 5](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)![Mockito](https://img.shields.io/badge/Mockito-25A162.svg?style=for-the-badge&logo=Mockito&logoColor=white)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)![H2](https://img.shields.io/badge/H2-007396.svg?style=for-the-badge&logo=H2&logoColor=white)![JUnit 5](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)
 
-![WireMock](https://img.shields.io/badge/WireMock-8A2BE2.svg?style=for-the-badge&logo=WireMock&logoColor=white)![H2](https://img.shields.io/badge/H2-007396.svg?style=for-the-badge&logo=H2&logoColor=white)![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![Mockito](https://img.shields.io/badge/Mockito-25A162.svg?style=for-the-badge&logo=Mockito&logoColor=white)![WireMock](https://img.shields.io/badge/WireMock-8A2BE2.svg?style=for-the-badge&logo=WireMock&logoColor=white)![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 ## Guia de Uso
 
@@ -106,6 +106,11 @@ A cobertura mínima exigida dos testes foi de 60% do código da aplicação. E a
     - Utilize uma ferramenta HTTP Client, como [Postman](https://www.postman.com/)
       ou [Insomnia](https://insomnia.rest/).
         - URL base: `http://localhost:8080` (ou de acordo com a porta configurada na máquina).
+        - É possível consultar exemplos de requisições logo abaixo.
+
+6. **Execute os testes automatizados**:
+
+    - Repositório com cenários de testes End-to-End usando Cucumber: [Testes E2E](https://github.com/peixotots/API-filmes-testese2e)
 
 ### EXEMPLOS DE REQUISIÇÕES
 
@@ -201,7 +206,7 @@ A cobertura mínima exigida dos testes foi de 60% do código da aplicação. E a
 - [x] Apresentação do código, da documentação e da aplicação em funcionamento
 - [x] Implementação inicial do Front-end
 - [x] Diagrama de classes
-- [x] Testes automatizados: testes unitários e de integração
+- [x] Testes automatizados: testes unitários, de integração e cenários de testes End-to-End usando Cucumber
 
 ## O Que Não Foi Entregue
 
