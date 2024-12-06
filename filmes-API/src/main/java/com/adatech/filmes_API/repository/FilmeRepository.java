@@ -8,7 +8,9 @@ import java.util.Optional;
 
 public interface FilmeRepository extends JpaRepository<Filme, Long> {
 
-    List<Filme> findByNomeFilmeContaining(String nome);
+    static List<Filme> findByNomeFilmeContaining(String nome) {
+        return null;
+    }
 
     Optional<Filme> findById(Long id);
 

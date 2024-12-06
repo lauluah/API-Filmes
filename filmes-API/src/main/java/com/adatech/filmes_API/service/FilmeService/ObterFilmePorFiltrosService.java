@@ -25,7 +25,7 @@ public class ObterFilmePorFiltrosService {
     }
 
     public List<Filme> obterFilmesPorNomeFilme(String nomeFilme) {
-        List<Filme> filmesPorNome = filmeRepository.findByNomeFilmeContaining(nomeFilme);
+        List<Filme> filmesPorNome = FilmeRepository.findByNomeFilmeContaining(nomeFilme);
         if (filmesPorNome.isEmpty()) {
             throw new FilmeNaoEncontradoException(String.format("Não foi possível encontrar filmes com o nome: %s", nomeFilme));
         }
