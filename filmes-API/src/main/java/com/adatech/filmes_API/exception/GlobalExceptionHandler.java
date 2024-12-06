@@ -30,6 +30,22 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
+    @ExceptionHandler({CpfDuplicadoException.class})
+    public ResponseEntity<Error> handlerCpfDuplicadoException(CpfDuplicadoException e) {
+        Error error = new Error();
+        error.setMensagem(e.getMessage());
+        error.setCodigoErro("USR-409");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler({EmailDuplicadoException.class})
+    public ResponseEntity<Error> handlerEmailDuplicadoException(Exception e) {
+        Error error = new Error();
+        error.setMensagem(e.getMessage());
+        error.setCodigoErro("USR-409");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<Error> handleValidationError(MethodArgumentNotValidException e) {
         Error error = new Error();
@@ -44,7 +60,7 @@ public class GlobalExceptionHandler {
         });
 
         error.setErrors(errors);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error); //400
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
 

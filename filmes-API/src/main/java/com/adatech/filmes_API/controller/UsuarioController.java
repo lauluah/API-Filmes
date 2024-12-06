@@ -39,7 +39,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> obterUsuarioPorId(@PathVariable Long id) {
+    public ResponseEntity<Usuario> obterUsuarioPorId(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(obterUsuarioPorIdService.execute(id));
     }
 
@@ -54,8 +54,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/email")
-    public Usuario ObterUsuarioPorEmail(@RequestParam String email) {
-        return obterUsuariosPorFiltro.obterUsuarioPorEmail(email);
+    public ResponseEntity<Usuario> ObterUsuarioPorEmail(@RequestParam String email) {
+        return ResponseEntity.status(HttpStatus.OK).body(obterUsuariosPorFiltro.obterUsuarioPorEmail(email));
     }
 
     @DeleteMapping("/{id}")

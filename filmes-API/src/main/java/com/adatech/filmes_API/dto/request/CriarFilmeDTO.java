@@ -31,6 +31,10 @@ public class CriarFilmeDTO {
         this.corAvaliacao = corAvaliacao;
     }
 
+    public CriarFilmeDTO() {
+
+    }
+
     public String getNomeFilme() {
         return nomeFilme;
     }

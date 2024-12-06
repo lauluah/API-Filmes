@@ -8,17 +8,8 @@
 </h1></h1>
 
 <div align="center">
-<b><span style="font-size: 18px;">Módulo 5: Programação Web II </span></b><br>Projeto desenvolvido pelo grupo 5 da turma 1173 do programa <b>Santander Coders</b> 2024.1 em parceria com a <b>Ada Tech</b>
+<b><span style="font-size: 18px;">Módulos 5 e 6: Programação Web II e Testes Automatizados I</span></b><br>Projeto desenvolvido pelo grupo 5 da turma 1173 do programa <b>Santander Coders</b> 2024.1 em parceria com a <b>Ada Tech</b>
 </div>
-
-## Objetivos do Projeto
-
-Construir uma API REST com os seguintes itens:
-
-- Persistência em banco de dados (H2 ou Postgres);
-- Configuração de segurança: controle de rota e login (jwt opcional);
-- Consumo de uma API externa pública;
-- Opcionais: implementação de Swagger e Front-end.
 
 ## Descrição do Projeto
 
@@ -27,6 +18,8 @@ consultar informações sobre filmes, e também inclui funcionalidades de persis
 externa pública do [The Movie Database (TMDb)](https://www.themoviedb.org/).
 
 Também foi desenvolvida uma implementação inicial de front-end para que usuário possa interagir com a aplicação.
+
+Além disso, também foram desenvolvidos os testes automatizados para garantir a qualidade e a confiabilidade da aplicação. Os testes foram desenvolvidos utilizando o framework JUnit e a biblioteca Mockito para simulação de dependências.
 
 ### Principais Funcionalidades
 
@@ -56,13 +49,31 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 <img style="border-radius: 5%;" src="ImagensReadme/Front2.jpeg" height="290px" width="280px;" alt=""/><br />  </tr>
 </table>
 
-## Linguagem de Programação e Framework Utilizados
+## Objetivos do Projeto
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+O projeto atual foi desenvolvido ao longo dos módulos 5 e 6 da formação, sendo os objetivos de cada módulo os seguintes:
 
-## Ferramentas Utilizadas
+### MÓDULO 5 - Construir uma API REST com os seguintes itens:
 
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+- Persistência em banco de dados (H2 ou Postgres);
+- Configuração de segurança: controle de rota e login (jwt opcional);
+- Consumo de uma API externa pública;
+- Opcionais: implementação de Swagger e Front-end.
+
+### MÓDULO 6 - Criação dos Testes Automatizados da Aplicação
+
+Tipos de testes implementados incluem:
+- **Testes Unitários:** Verificação do comportamento de unidades individuais de código, como serviços e controladores, de forma isolada.
+- **Testes de Integração:** Validação da interação entre diferentes componentes da aplicação e a integração com o banco de dados.
+- **Testes de Integração com API Externa:** Garantia de que a integração com a API do TMDb funciona corretamente e retorna os dados esperados.
+
+A cobertura mínima exigida dos testes foi de 60% do código da aplicação. E a implementação de testes end-to-end foi opcional.
+
+## Ferramentas e Tecnologias Utilizadas
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)![H2](https://img.shields.io/badge/H2-007396.svg?style=for-the-badge&logo=H2&logoColor=white)![JUnit 5](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)
+
+![Mockito](https://img.shields.io/badge/Mockito-25A162.svg?style=for-the-badge&logo=Mockito&logoColor=white)![WireMock](https://img.shields.io/badge/WireMock-8A2BE2.svg?style=for-the-badge&logo=WireMock&logoColor=white)![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 ## Guia de Uso
 
@@ -95,10 +106,15 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
     - Utilize uma ferramenta HTTP Client, como [Postman](https://www.postman.com/)
       ou [Insomnia](https://insomnia.rest/).
         - URL base: `http://localhost:8080` (ou de acordo com a porta configurada na máquina).
+        - É possível consultar exemplos de requisições logo abaixo.
+
+6. **Execute os testes automatizados**:
+
+    - Repositório com cenários de testes End-to-End usando Cucumber: [Testes E2E](https://github.com/peixotots/API-filmes-testese2e)
 
 ### EXEMPLOS DE REQUISIÇÕES
 
-#### Criar um Usuário no Banco de Dados
+#### a) Criar um Usuário no Banco de Dados
 
 - **Endpoint**: `http://localhost:8080/usuarios`
 - **Método**: POST
@@ -112,7 +128,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
     "email": "Email do Usuário"
     }
 
-#### Buscar Informações de um Usuário Criado
+#### b) Buscar Informações de um Usuário Criado
 
 - **Endpoint**: `/usuarios/{id}`
 - **Autorizar com login e senha**: email e senha do usuário criado
@@ -124,7 +140,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - É possível buscar o usuário pelos seguintes dados: {id}, {nome}, {email} e {cpf} (basta substituir o valor final do
   parâmetro na URL).
 
-#### Deletar um Usuário do Banco de Dados
+#### c) Deletar um Usuário do Banco de Dados
 
 - **Endpoint**: `/usuarios/{id}`
 - **Autorizar com login e senha**: email e senha do usuário criado
@@ -134,7 +150,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
   curl -X DELETE  http://localhost:8080/usuarios/1
   ```
 
-#### Criar um Filme no Banco de Dados
+#### d) Criar um Filme no Banco de Dados
 
 - **Endpoint**: `/filmes`
 - **Método**: POST
@@ -149,7 +165,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
   }
   ```
 
-#### Buscar Informações de um Filme Criado
+#### e) Buscar Informações de um Filme Criado
 
 - **Endpoint**: `/filmes/nomeFilme?nome={nomeFilme}`
 - **Método**: GET
@@ -160,7 +176,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - É possível buscar o filme criado pelos seguintes dados: {id}, {nome}, {gênero}, {cor da avaliação} e {nota} (basta
   substituir o valor final do parâmetro na URL).
 
-#### Buscar Filme pelo Nome na API Externa
+#### f) Buscar Filme pelo Nome na API Externa
 
 - **Endpoint**: `/api/filmes/tmdb/nome/{nomeFilme}`
 - **Método**: GET
@@ -171,7 +187,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - Será retornado um JSON com as seguinte informações sobre o filme buscado: título, sinopse, data de lançamento, tempo
   de duração, gênero, popularidade e idioma original.
 
-#### Popular o Banco de Dados com Filmes da API Externa
+#### g) Popular o Banco de Dados com Filmes da API Externa
 
 - **Endpoint**: `/api/filmes/tmdb/nome/{nomeFilme}`
 - **Método**: POST
@@ -190,6 +206,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - [x] Apresentação do código, da documentação e da aplicação em funcionamento
 - [x] Implementação inicial do Front-end
 - [x] Diagrama de classes
+- [x] Testes automatizados: testes unitários, de integração e cenários de testes End-to-End usando Cucumber
 
 ## O Que Não Foi Entregue
 
@@ -203,22 +220,7 @@ Também foi desenvolvida uma implementação inicial de front-end para que usuá
 - **Configuração de Segurança**: Implementar controle de rota e autenticação básica.
 - **Front-end**: Desenvolver a interface do usuário para interagir com a aplicação e implementar a comunicação com o
   back-end.
-  
-## **Testes Automatizados**  
-Nosso projeto conta com **testes unitários**, **testes de integração** e **testes end-to-end** para garantir a qualidade e a confiabilidade do sistema.
-
-<img src="https://hermes.dio.me/assets/articles/7057c5f3-4df0-4a41-a913-bd7d6eafa7e4.png" alt="Testes Automatizados" width="500" height="300">
-
-### **Como executar os testes**
-1. Navegue até o pacote de testes no projeto (`src/test/java`).  
-2. Clique com o botão direito em `com.adatech.filmes_API`.  
-3. Selecione a opção **"Run tests in com.adatech.filmes_API"** para executar todos os testes de uma vez.  
-   - **Alternativamente**: Você pode rodar os testes individualmente, acessando as classes de teste específicas e clicando em **"Run"** na barra lateral.
-
-### **Cobertura dos testes**
-- **Unitários**: Validam métodos isolados em classes específicas.  
-- **Integração**: Testam a interação entre diferentes partes do sistema.  
-- **End-to-end**: Verificam o comportamento completo da aplicação, simulando fluxos reais.
+- **Testes Automatizados**: Entender como testar a lógica da aplicação (e não código) e pensar em cenários de teste.
 
 ## Integrantes
 
