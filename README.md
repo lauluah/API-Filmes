@@ -110,9 +110,21 @@ A cobertura mínima exigida dos testes foi de 60% do código da aplicação. E a
         - URL base: `http://localhost:8080` (ou de acordo com a porta configurada na máquina).
         - É possível consultar exemplos de requisições logo abaixo.
 
-6. **Execute os testes automatizados**:
+6. **Como executar os testes**:
 
-    - Repositório com cenários de testes End-to-End usando Cucumber: [Testes E2E](https://github.com/peixotots/API-filmes-testese2e)
+ Navegue até o pacote de testes no projeto:
+   - `src/test/java/com/adatech/filmes_API`
+
+ Execute todos os testes:
+   - Clique com o botão direito no pacote `com.adatech.filmes_API`.
+   - Selecione a opção **"Run tests in com.adatech.filmes_API"** para executar todos os testes de uma vez.
+
+ Execute testes individuais:
+   - Abra uma classe de teste específica, como `FilmeControllerUnitTest`.
+   - Clique com o botão direito na classe e selecione **"Run"** para executar os testes dessa classe.
+
+**End-to-End**
+ - Repositório com cenários de testes End-to-End usando Cucumber: [Testes E2E](https://github.com/peixotots/API-filmes-testese2e)
 
 ### EXEMPLOS DE REQUISIÇÕES
 
