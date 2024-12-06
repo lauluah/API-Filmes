@@ -67,6 +67,8 @@ Tipos de testes implementados incluem:
 - **Testes de Integração:** Validação da interação entre diferentes componentes da aplicação e a integração com o banco de dados.
 - **Testes de Integração com API Externa:** Garantia de que a integração com a API do TMDb funciona corretamente e retorna os dados esperados.
 
+ <img src="https://jera.com.br/blog/wp-content/uploads/2023/01/Pir%C3%A2mice-de-Testes.png" alt="Testes Automatizados" width="500" height="300">
+
 A cobertura mínima exigida dos testes foi de 60% do código da aplicação. E a implementação de testes end-to-end foi opcional.
 
 ## Ferramentas e Tecnologias Utilizadas
