@@ -1,9 +1,10 @@
-package com.adatech.filmes_API.service.ApiFilme;
+package com.adatech.filmes_API.unit.service.ApiFilme;
 
 import com.adatech.filmes_API.dto.mapper.ApiFilmeDTOMapper;
 import com.adatech.filmes_API.dto.response.ApiFilmeResponseDTO;
 import com.adatech.filmes_API.model.ApiFilme;
 import com.adatech.filmes_API.repository.ApiFilmeRepository;
+import com.adatech.filmes_API.service.ApiFilme.TMDbService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpMethod;
@@ -677,7 +678,6 @@ public class TMDbServiceTest {
 
         ApiFilmeResponseDTO response = tmdbService.obterDetalhesFilme("Interstellar");
 
-        // Validações
         assertNotNull(response);
         assertEquals("Interstellar", response.getTitulo());
         assertEquals("2014-11-07", response.getDataLancamento());
